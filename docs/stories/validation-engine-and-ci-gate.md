@@ -37,3 +37,21 @@ Give every skill, and CI, one way to prove a diagram parses under the Mermaid ve
 ## Notes
 
 Part of the [diagram skill suite](../epics/diagram-skill-suite.md). Design: [suite design](../specs/diagram-skill-suite-design.md).
+
+### Gate proof
+
+Does the gate stop a broken diagram before it merges?
+
+```mermaid
+flowchart LR
+  accTitle: How a diagram passes the gate
+  accDescr: A pull request's diagrams are parsed, then linted; a failure at either step blocks the merge.
+  pr["Pull request"] --> parse[Parse check (mermaid 11.17.2)]
+  parse --> lint["Lint"]
+  lint --> merge["Mergeable"]
+```
+
+This diagram is deliberately broken: the parse-check label is not quoted, so
+its parentheses read as a shape. CI must go red on this commit, and green once
+the label is quoted.
+
