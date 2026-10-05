@@ -1,0 +1,65 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [dev, main]
+
+jobs:
+  diagrams:
+    name: diagram gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: skills/diagram-review/scripts/package-lock.json
+      - name: Install the pinned Mermaid parser
+        run: npm ci --prefix skills/diagram-review/scripts
+      # Every ```mermaid fence in the docs bundle and the skills must parse under
+      # the Mermaid version GitHub renders (ADR-0001). lore check does not look
+      # inside fences, so this is the only gate on diagram syntax.
+      - name: Parse every Mermaid diagram
+        run: node skills/diagram-review/scripts/mermaid-check.mjs docs skills
+      - name: Self-test the gate (broken fails, fixed passes)
+        run: tests/mermaid_selftest.sh
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Lint diagrams (profile, accessibility, size, explanation)
+        run: python skills/diagram-review/scripts/diagram_lint.py docs skills
+      - name: pytest
+        run: |
+          python -m pip install --quiet pytest
+          python -m pytest -q
+
+  lore-check:
+    name: lore check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      # Both versions come from files that already declare them, so there is no
+      # second pin to drift: lore from the docs index's generator stamp, quest
+      # from the managed block in CLAUDE.md (the opum-marketplace pattern).
+      - name: Resolve declared lore and quest versions
+        id: v
+        run: |
+          set -euo pipefail
+          lore="$(sed -n 's/.*by: lore\/\([0-9][0-9.]*\).*/\1/p' docs/index.md | head -1)"
+          quest="$(sed -n 's/.*Quest CLI \([0-9][0-9.]*\).*/\1/p' CLAUDE.md | head -1)"
+          [ -n "$lore" ] && [ -n "$quest" ] || { echo "::error::could not resolve lore ($lore) or quest ($quest) version"; exit 1; }
+          echo "lore=$lore" >> "$GITHUB_OUTPUT"
+          echo "quest=$quest" >> "$GITHUB_OUTPUT"
+      - name: Install lore and quest
+        run: npm install -g "@opum-ai/lore@${{ steps.v.outputs.lore }}" "@opum-ai/quest@${{ steps.v.outputs.quest }}"
+      - name: lore check
+        run: lore check
+      - name: Managed instructions are current
+        run: |
+          quest agents --check --target claude
+          lore agents --check
