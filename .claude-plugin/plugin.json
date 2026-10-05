@@ -1,0 +1,22 @@
+{
+  "name": "diagram-skills",
+  "displayName": "Diagram Skills",
+  "description": "Explain and diagram architectures, processes, decisions, data and plans: Mermaid in Markdown, pitched to the reader's level, drawn from real Quest and lore records, and checked for syntax, legibility, accessibility and truth.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Opum AI",
+    "url": "https://github.com/opum-ai"
+  },
+  "homepage": "https://github.com/opum-ai/diagram-skills",
+  "repository": "https://github.com/opum-ai/diagram-skills",
+  "license": "MIT",
+  "keywords": [
+    "diagrams",
+    "mermaid",
+    "c4",
+    "architecture",
+    "adr",
+    "accessibility",
+    "documentation"
+  ]
+}
