@@ -1,0 +1,7 @@
+schemaVersion = 1
+name = "diagram-skills"
+taskIdPrefix = "DSKI"
+
+[tasks]
+types = ["feature", "bug", "chore", "docs", "enhancement", "spike"]
+priorities = ["low", "medium", "high", "critical"]
