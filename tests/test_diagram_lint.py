@@ -149,3 +149,13 @@ def test_cli_exit_codes_and_json(tmp_path, capsys):
     out = json.loads(capsys.readouterr().out)
     assert out["errors"] >= 1 and out["findings"][0]["rule"] == "profile-type"
     assert dl.main([str(tmp_path / "missing.md")]) == 2
+
+
+def test_mermaid_inside_another_fence_is_content(tmp_path):
+    text = (
+        "# T\n\nAn example answer:\n\n~~~text\n```mermaid\ngraph LR\n  a[bad (label)]\n```\n~~~\n\n"
+        + doc(GOOD_BODY).split("\n", 2)[2]
+    )
+    findings = run(tmp_path, text)
+    assert findings == [], findings
+    assert len(dl.diagrams_in(tmp_path / "doc.md")) == 1

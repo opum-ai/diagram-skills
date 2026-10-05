@@ -18,6 +18,7 @@ expect 0 "valid diagrams parse"                       "$F/pass"
 expect 0 "every broken diagram fails with a syntax error" --expect-fail "$F/fail"
 expect 1 "broken diagrams fail the gate"              "$F/fail"
 expect 1 "one broken fence fails a Markdown file"     "$F/markdown"
+expect 0 "a fence nested in another fence is not a diagram" "$F/nested"
 rm -f /tmp/selftest.$$
 [ $rc -eq 0 ] && echo "gate self-test OK" || echo "gate self-test FAILED"
 exit $rc

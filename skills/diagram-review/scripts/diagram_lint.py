@@ -41,10 +41,7 @@ OFF_PROFILE = {
     "stateDiagram": "use `stateDiagram-v2`",
 }
 
-FENCE_RE = re.compile(
-    r"^([ \t]*)(`{3,}|~{3,})[ \t]*mermaid(?:[ \t][^\n]*)?\n(.*?)^\1\2[ \t]*$",
-    re.M | re.S,
-)
+FENCE_LINE_RE = re.compile(r"^ {0,3}(`{3,}|~{3,})(.*)$")
 HEADING_RE = re.compile(r"^\s{0,3}#{1,6}\s")
 ARROW_RE = re.compile(r"\s*(?:<?(?:-{2,}|={2,}|-\.+-?)(?:>|o|x)?|~~~|&)\s*")
 
@@ -68,42 +65,51 @@ class Diagram:
 
 # ---------------------------------------------------------------- extraction
 
+def mermaid_fences(text: str) -> list[tuple[int, int, str]]:
+    """(open line index, close line index, source) for each top-level ```mermaid fence.
+
+    Fence-aware like CommonMark: a fence closes only on the same character with at
+    least the same length, so a ```mermaid line inside a ~~~text example is content.
+    """
+    out, open_ = [], None
+    lines = text.split("\n")
+    for i, line in enumerate(lines):
+        m = FENCE_LINE_RE.match(line)
+        if open_:
+            ch, n, start, is_mermaid = open_
+            if m and m.group(1)[0] == ch and len(m.group(1)) >= n and not m.group(2).strip():
+                if is_mermaid:
+                    out.append((start, i, "\n".join(lines[start + 1:i]) + "\n"))
+                open_ = None
+        elif m:
+            open_ = (m.group(1)[0], len(m.group(1)), i, bool(re.match(r"mermaid(\s|$)", m.group(2).strip())))
+    return out
+
+
 def diagrams_in(path: Path) -> list[Diagram]:
     text = path.read_text(encoding="utf-8")
     if path.suffix not in (".md", ".markdown"):
         return [Diagram(where=str(path), src=text)]
-    out: list[Diagram] = []
-    matches = list(FENCE_RE.finditer(text))
-    for m in matches:
-        line = text.count("\n", 0, m.start()) + 1
-        out.append(
-            Diagram(
-                where=f"{path}:{line}",
-                src=m.group(3),
-                before=_prose_before(text, m.start()),
-                after=_prose_after(text, m.end()),
-                in_markdown=True,
-            )
+    lines = text.split("\n")
+    return [
+        Diagram(
+            where=f"{path}:{start + 1}",
+            src=src,
+            before="\n".join(reversed(_prose_lines(list(reversed(lines[:start]))))),
+            after="\n".join(_prose_lines(lines[end + 1:])),
+            in_markdown=True,
         )
-    return out
+        for start, end, src in mermaid_fences(text)
+    ]
 
 
 def _prose_lines(lines: list[str]) -> list[str]:
     kept = []
     for ln in lines:
-        if HEADING_RE.match(ln) or re.match(r"^\s*(`{3,}|~{3,})", ln):
+        if HEADING_RE.match(ln) or FENCE_LINE_RE.match(ln):
             break
         kept.append(ln)
     return kept
-
-
-def _prose_before(text: str, start: int) -> str:
-    lines = text[:start].splitlines()
-    return "\n".join(reversed(_prose_lines(list(reversed(lines)))))
-
-
-def _prose_after(text: str, end: int) -> str:
-    return "\n".join(_prose_lines(text[end:].splitlines()[1:]))
 
 
 # ---------------------------------------------------------------- analysis

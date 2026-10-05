@@ -41,17 +41,31 @@ function walk(p) {
   if (statSync(p).isDirectory()) return readdirSync(p).sort().flatMap((n) => (n === 'node_modules' ? [] : walk(join(p, n))));
   return EXT.has(extname(p)) ? [p] : [];
 }
+// Fence-aware scan (CommonMark rules): a fence closes only on the same character
+// with at least the same length, so a ```mermaid line inside a ~~~text example
+// is content, not a diagram. Only fences whose info string is exactly `mermaid`
+// (optionally followed by attributes) are checked, so ```mermaid-broken or
+// ```text can show a bad example without failing the gate.
+function mermaidFences(text) {
+  const out = [];
+  let open = null;
+  text.split('\n').forEach((line, i) => {
+    const m = line.match(/^ {0,3}(`{3,}|~{3,})(.*)$/);
+    if (open) {
+      if (m && m[1][0] === open.ch && m[1].length >= open.len && m[2].trim() === '') {
+        if (open.mermaid) out.push({ line: open.line, src: open.body.join('\n') + '\n' });
+        open = null;
+      } else open.body.push(line);
+    } else if (m) {
+      open = { ch: m[1][0], len: m[1].length, line: i + 1, mermaid: /^mermaid(\s|$)/.test(m[2].trim()), body: [] };
+    }
+  });
+  return out;
+}
 function diagramsIn(file) {
   const text = readFileSync(file, 'utf8');
   if (!['.md', '.markdown'].includes(extname(file))) return [{ where: file, src: text }];
-  const out = [];
-  // Info string must be exactly `mermaid` (optionally followed by attributes), so a
-  // ```mermaid-broken or ```text fence can show a bad example without failing the gate.
-  const re = /^([ \t]*)(`{3,}|~{3,})[ \t]*mermaid(?:[ \t][^\n]*)?\n([\s\S]*?)^\1\2[ \t]*$/gm;
-  for (let m; (m = re.exec(text)); ) {
-    out.push({ where: `${file}:${text.slice(0, m.index).split('\n').length}`, src: m[3] });
-  }
-  return out;
+  return mermaidFences(text).map(({ line, src }) => ({ where: `${file}:${line}`, src }));
 }
 
 let bad = 0, env = 0, total = 0;
