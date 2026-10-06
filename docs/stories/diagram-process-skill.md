@@ -10,7 +10,7 @@ tasks:
 generated:
   by: lore/0.12.0
   at: 2026-10-05T19:57:55.921Z
-lore_task_status: todo
+lore_task_status: done
 ---
 
 # diagram-process skill
@@ -32,7 +32,7 @@ Show what happens, in what order and who does it, with flowcharts, lanes, sequen
 <!-- lore:tasks:begin -->
 | Task | Title | Status |
 |---|---|---|
-| [DSKI-9](../../.quest/tasks/DSKI-9.json) | Skill: diagram-process (flows, sequences, state machines) | To Do |
+| [DSKI-9](../../.quest/completed/DSKI-9.json) | Skill: diagram-process (flows, sequences, state machines) | Done |
 <!-- lore:tasks:end -->
 
 ## Notes
