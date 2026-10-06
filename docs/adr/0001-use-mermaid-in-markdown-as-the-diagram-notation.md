@@ -63,7 +63,8 @@ They follow a conservative syntax profile:
 - `flowchart` rather than `graph`;
 - `stateDiagram-v2`;
 - quoted labels;
-- no `end`, `o` or `x` ids;
+- no lowercase `end` as an id, and no id starting with `o` or `x`
+  directly after an arrow;
 - no `@{ shape: }` and no `-beta` types;
 - `accTitle` and `accDescr` on every diagram.
 

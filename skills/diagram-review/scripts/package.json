@@ -1,0 +1,13 @@
+{
+  "name": "diagram-review-engine",
+  "private": true,
+  "description": "Headless Mermaid parse check pinned to the Mermaid version GitHub renders.",
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "scripts": { "check": "node mermaid-check.mjs" },
+  "dependencies": {
+    "jsdom": "30.1.2",
+    "mermaid": "11.17.2"
+  }
+}

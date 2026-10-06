@@ -63,6 +63,8 @@ The rest of this Spec holds for either shape.
 
 ### 1. The loop every skill runs
 
+What does every skill do between a request and a published diagram?
+
 ```mermaid
 flowchart LR
   accTitle: The loop every diagram skill runs

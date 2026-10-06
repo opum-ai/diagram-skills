@@ -202,7 +202,8 @@ because its LLM corpus is thin.
    added after the pin will not render. GitHub has lagged by ten months
    before [54].
 2. **Write to a conservative profile:** `flowchart`, not `graph`;
-   `stateDiagram-v2`; quote every label; no `end`, `o` or `x` ids; no
+   `stateDiagram-v2`; quote every label; no lowercase `end` id and no `o`
+   or `x` id glued to an arrow; no
    `@{ shape: }`, no `-beta` types; prefer `flowchart` with C4 classes over
    `C4Context` beyond the smallest context view.
 3. **Parse and repair before delivery, and gate in CI.** A parse check is
