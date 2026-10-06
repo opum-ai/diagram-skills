@@ -10,7 +10,7 @@ tasks:
 generated:
   by: lore/0.12.0
   at: 2026-10-05T19:57:56.079Z
-lore_task_status: todo
+lore_task_status: done
 ---
 
 # diagram-plan skill
@@ -32,7 +32,7 @@ Show what blocks what and where the work stands, generated from Quest records ra
 <!-- lore:tasks:begin -->
 | Task | Title | Status |
 |---|---|---|
-| [DSKI-11](../../.quest/tasks/DSKI-11.json) | Skill: diagram-plan (Quest dependency and milestone views) | To Do |
+| [DSKI-11](../../.quest/completed/DSKI-11.json) | Skill: diagram-plan (Quest dependency and milestone views) | Done |
 <!-- lore:tasks:end -->
 
 ## Notes
