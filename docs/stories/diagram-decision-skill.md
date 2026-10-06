@@ -10,7 +10,7 @@ tasks:
 generated:
   by: lore/0.12.0
   at: 2026-10-05T19:57:56.000Z
-lore_task_status: todo
+lore_task_status: done
 ---
 
 # diagram-decision skill
@@ -32,7 +32,7 @@ Show what was decided, against which options, and why, for ADRs and Quest decisi
 <!-- lore:tasks:begin -->
 | Task | Title | Status |
 |---|---|---|
-| [DSKI-10](../../.quest/tasks/DSKI-10.json) | Skill: diagram-decision (ADR and Quest decision diagrams) | To Do |
+| [DSKI-10](../../.quest/completed/DSKI-10.json) | Skill: diagram-decision (ADR and Quest decision diagrams) | Done |
 <!-- lore:tasks:end -->
 
 ## Notes

@@ -10,6 +10,7 @@
 - 2026-10-06T11:55:28-05:00 8966b14aa0f73da9c9b45eb1e13d9644aa2c5128 DSKI-6: eval harness, objective grader and iteration-1 benchmark (#6)
 - 2026-10-06T11:57:46-05:00 bd5ef075796a5f21c70c4a0bb0947810bba04499 DSKI-7: diagram-review skill - validator, critic and shared references (#7)
 - 2026-10-06T12:00:09-05:00 6b633c41a2c9f0efebe3699dbfb37802beb355e8 DSKI-8: diagram-architecture skill - C4 views from the real repository (#8)
+- 2026-10-06T12:01:35-05:00 c4804841a5c0d0d1383bdcf3126bbe10a4a6aa9e DSKI-9: diagram-process skill - flows, lanes, sequences and state machines (#9)
 
 ## docs/reference
 
