@@ -12,6 +12,7 @@
 - 2026-10-06T12:00:09-05:00 6b633c41a2c9f0efebe3699dbfb37802beb355e8 DSKI-8: diagram-architecture skill - C4 views from the real repository (#8)
 - 2026-10-06T12:01:35-05:00 c4804841a5c0d0d1383bdcf3126bbe10a4a6aa9e DSKI-9: diagram-process skill - flows, lanes, sequences and state machines (#9)
 - 2026-10-06T12:02:39-05:00 42c9804698201859aa6fcf14d4980fc48f6045ff DSKI-10: diagram-decision skill - ADR and Quest decision diagrams (#10)
+- 2026-10-06T12:03:05-05:00 d5104f8bca9e3f0f59605e0e3e44a028f2cf214b DSKI-11: diagram-plan skill - Quest dependency and milestone views
 
 ## docs/reference
 
