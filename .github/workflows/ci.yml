@@ -59,6 +59,11 @@ jobs:
         run: npm install -g "@opum-ai/lore@${{ steps.v.outputs.lore }}" "@opum-ai/quest@${{ steps.v.outputs.quest }}"
       - name: lore check
         run: lore check
+      # Every node in a committed diagram must trace to a real path, Quest record
+      # or lore doc (%% ref lines), and generated plan diagrams must match Quest's
+      # dependencies exactly. Runs here because this job has quest installed.
+      - name: Diagram truth check
+        run: python3 skills/diagram-review/scripts/diagram_truth.py --root . docs skills
       - name: Managed instructions are current
         run: |
           quest agents --check --target claude

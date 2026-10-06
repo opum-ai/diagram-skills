@@ -49,6 +49,10 @@ flowchart LR
   pr["Pull request"] --> parse["Parse check (mermaid 11.17.2)"]
   parse --> lint["Lint"]
   lint --> merge["Mergeable"]
+  %% ref pr = ext:A pull request into dev
+  %% ref parse = path:.github/workflows/ci.yml#Parse every Mermaid diagram
+  %% ref lint = path:.github/workflows/ci.yml#Lint diagrams
+  %% ref merge = ext:GitHub allows the merge once both jobs pass
 ```
 
 This diagram was committed broken on purpose in `ae16759`: the parse-check

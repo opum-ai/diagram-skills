@@ -10,7 +10,7 @@ tasks:
 generated:
   by: lore/0.12.0
   at: 2026-10-05T19:57:55.761Z
-lore_task_status: todo
+lore_task_status: done
 ---
 
 # diagram-review skill
@@ -32,7 +32,7 @@ Check any Mermaid diagram for syntax, legibility, accessibility and truth, and s
 <!-- lore:tasks:begin -->
 | Task | Title | Status |
 |---|---|---|
-| [DSKI-7](../../.quest/tasks/DSKI-7.json) | Skill: diagram-review (validator and critic) | To Do |
+| [DSKI-7](../../.quest/completed/DSKI-7.json) | Skill: diagram-review (validator and critic) | Done |
 <!-- lore:tasks:end -->
 
 ## Notes

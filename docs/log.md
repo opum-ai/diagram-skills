@@ -7,6 +7,7 @@
 - 2026-10-05T14:56:52-05:00 650d1a35e509df8183baeb43d5e0f127ba984fd4 DSKI-3: suite design and the six-skill ADR (#4)
 - 2026-10-05T15:02:20-05:00 2eea5a0d38290558de381b8d5fb1720cec5fee14 DSKI-5: Mermaid validation engine and CI gate
 - 2026-10-06T11:53:13-05:00 daddd02a289f9d15d05edfbb729eeda4463cef55 DSKI-5: Mermaid validation engine and CI gate (#5)
+- 2026-10-06T11:55:28-05:00 8966b14aa0f73da9c9b45eb1e13d9644aa2c5128 DSKI-6: eval harness, objective grader and iteration-1 benchmark (#6)
 
 ## docs/reference
 

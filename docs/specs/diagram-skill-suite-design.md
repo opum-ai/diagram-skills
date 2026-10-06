@@ -74,6 +74,11 @@ flowchart LR
   draft --> check{"Parse, lint and truth checks pass?"}
   check -- "no: error fed back" --> draft
   check -- "yes" --> publish["Publish to doc or reply"]
+  %% ref level = path:skills/diagram-review/references/levels.md
+  %% ref read = path:skills/diagram-review/references/truth.md#Read the source first
+  %% ref draft = path:skills/diagram-review/references/mermaid-profile.md
+  %% ref check = path:skills/diagram-review/references/checks.md
+  %% ref publish = path:skills/diagram-review/references/persisting.md
 ```
 
 The loop starts with the reader and the question, not the picture. It
