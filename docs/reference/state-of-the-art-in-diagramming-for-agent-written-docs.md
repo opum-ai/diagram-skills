@@ -292,6 +292,11 @@ flowchart LR
   parse -- "yes" --> truth{"Matches source and prose?"}
   truth -- "no: name the mismatch" --> draft
   truth -- "yes" --> publish["Publish with explanation"]
+  %% ref read = path:skills/diagram-review/references/truth.md#Read the source first
+  %% ref draft = path:skills/diagram-review/references/levels.md
+  %% ref parse = path:skills/diagram-review/scripts/mermaid-check.mjs
+  %% ref truth = path:skills/diagram-review/scripts/diagram_truth.py
+  %% ref publish = path:skills/diagram-review/references/persisting.md
 ```
 
 Read it left to right. A diagram starts from real records, not memory.
