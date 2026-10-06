@@ -10,7 +10,7 @@ tasks:
 generated:
   by: lore/0.12.0
   at: 2026-10-05T19:57:50.404Z
-lore_task_status: in-progress
+lore_task_status: done
 ---
 
 # Validation engine and CI gate
@@ -31,7 +31,7 @@ Give every skill, and CI, one way to prove a diagram parses under the Mermaid ve
 <!-- lore:tasks:begin -->
 | Task | Title | Status |
 |---|---|---|
-| [DSKI-5](../../.quest/tasks/DSKI-5.json) | Validation engine and CI gate for Mermaid diagrams | In Progress |
+| [DSKI-5](../../.quest/completed/DSKI-5.json) | Validation engine and CI gate for Mermaid diagrams | Done |
 <!-- lore:tasks:end -->
 
 ## Notes
