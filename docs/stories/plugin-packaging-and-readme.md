@@ -10,7 +10,7 @@ tasks:
 generated:
   by: lore/0.12.0
   at: 2026-10-05T19:57:56.232Z
-lore_task_status: todo
+lore_task_status: done
 ---
 
 # Plugin packaging and README
@@ -30,7 +30,7 @@ Make the suite installable and explain it the way the sibling plugins do.
 <!-- lore:tasks:begin -->
 | Task | Title | Status |
 |---|---|---|
-| [DSKI-13](../../.quest/tasks/DSKI-13.json) | README, plugin validation and final report | To Do |
+| [DSKI-13](../../.quest/completed/DSKI-13.json) | README, plugin validation and final report | Done |
 <!-- lore:tasks:end -->
 
 ## Notes

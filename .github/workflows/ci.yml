@@ -22,14 +22,14 @@ jobs:
       # the Mermaid version GitHub renders (ADR-0001). lore check does not look
       # inside fences, so this is the only gate on diagram syntax.
       - name: Parse every Mermaid diagram
-        run: node skills/diagram-review/scripts/mermaid-check.mjs docs skills
+        run: node skills/diagram-review/scripts/mermaid-check.mjs docs skills README.md
       - name: Self-test the gate (broken fails, fixed passes)
         run: tests/mermaid_selftest.sh
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - name: Lint diagrams (profile, accessibility, size, explanation)
-        run: python skills/diagram-review/scripts/diagram_lint.py docs skills
+        run: python skills/diagram-review/scripts/diagram_lint.py docs skills README.md
       - name: pytest
         run: |
           python -m pip install --quiet pytest
@@ -63,7 +63,7 @@ jobs:
       # or lore doc (%% ref lines), and generated plan diagrams must match Quest's
       # dependencies exactly. Runs here because this job has quest installed.
       - name: Diagram truth check
-        run: python3 skills/diagram-review/scripts/diagram_truth.py --root . docs skills
+        run: python3 skills/diagram-review/scripts/diagram_truth.py --root . docs skills README.md
       - name: Managed instructions are current
         run: |
           quest agents --check --target claude
