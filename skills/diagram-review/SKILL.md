@@ -88,6 +88,27 @@ self-tests the gate (`tests/mermaid_selftest.sh` proves broken diagrams fail
 and fixed ones pass), lints, and runs `lore check`. `lore check` never looks
 inside a Mermaid fence, so this gate is the only one on diagram syntax.
 
+## Exporting images (opt-in)
+
+Diagrams stay as Mermaid source by default. GitHub and the IDEs render it,
+and source diffs cleanly. When the user needs a picture file for slides,
+email or Confluence, use `<engine>/diagram_export.py`:
+
+```bash
+python3 <engine>/diagram_export.py install          # prints the cost (~650 MB); installs nothing
+python3 <engine>/diagram_export.py install --yes    # only after the user agrees to that cost
+python3 <engine>/diagram_export.py export --format svg|png|both --out <dir> <files>
+python3 <engine>/diagram_export.py uninstall        # removes its cache directory, nothing else
+```
+
+Every diagram is parse-checked before rendering, and a failure is refused.
+Every SVG is also inspected, because `mmdc` can exit 0 while writing an
+image that only says "Syntax error". Renders happen locally; never send a
+diagram to an online render service unless the user explicitly asks,
+because that publishes its content. Exit 1 means at least one diagram was
+refused or failed. Report which ones; never present a partial export as
+complete.
+
 ## Honesty rules
 
 - A check that did not run is reported as not run, not as passed.
@@ -104,4 +125,4 @@ inside a Mermaid fence, so this gate is the only one on diagram syntax.
 - `references/levels.md`: beginner, intermediate and advanced caps and explanations.
 - `references/truth.md`: reading the source, `%% ref` kinds, the prose-agreement checklist.
 - `references/persisting.md`: where diagrams live in lore and how they link to Quest.
-- `scripts/`: `mermaid-check.mjs`, `diagram_lint.py`, `diagram_truth.py`, and the generators `quest_graph.py`, `schema_er.py`, `repo_inventory.py`.
+- `scripts/`: `mermaid-check.mjs`, `diagram_lint.py`, `diagram_truth.py`, the generators `quest_graph.py`, `schema_er.py`, `repo_inventory.py`, and the opt-in `diagram_export.py`.
