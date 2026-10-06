@@ -10,7 +10,7 @@ tasks:
 generated:
   by: lore/0.12.0
   at: 2026-10-05T19:57:56.155Z
-lore_task_status: todo
+lore_task_status: done
 ---
 
 # diagram-data skill
@@ -32,7 +32,7 @@ Show the shape of the data, traced to the schema files that define it.
 <!-- lore:tasks:begin -->
 | Task | Title | Status |
 |---|---|---|
-| [DSKI-12](../../.quest/tasks/DSKI-12.json) | Skill: diagram-data (ER and schema diagrams) | To Do |
+| [DSKI-12](../../.quest/completed/DSKI-12.json) | Skill: diagram-data (ER and schema diagrams) | Done |
 <!-- lore:tasks:end -->
 
 ## Notes
