@@ -10,7 +10,7 @@ tasks:
 generated:
   by: lore/0.12.0
   at: 2026-10-05T19:57:55.843Z
-lore_task_status: todo
+lore_task_status: done
 ---
 
 # diagram-architecture skill
@@ -32,7 +32,7 @@ Draw C4 context, container and component views of the real system, never a templ
 <!-- lore:tasks:begin -->
 | Task | Title | Status |
 |---|---|---|
-| [DSKI-8](../../.quest/tasks/DSKI-8.json) | Skill: diagram-architecture (C4 views from the real repository) | To Do |
+| [DSKI-8](../../.quest/completed/DSKI-8.json) | Skill: diagram-architecture (C4 views from the real repository) | Done |
 <!-- lore:tasks:end -->
 
 ## Notes

@@ -12,7 +12,7 @@
 // Exit codes: 0 = every diagram as expected; 1 = at least one syntax result not as expected;
 //             2 = usage or ENVIRONMENT error (a non-syntax exception: broken shim, bad install).
 // --expect-fail inverts the check (each diagram must fail with a SYNTAX error), for negative fixtures.
-import { readFileSync, statSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, statSync, readdirSync } from 'node:fs';
 import { join, extname } from 'node:path';
 import { createRequire } from 'node:module';
 import { JSDOM } from 'jsdom';
@@ -37,6 +37,7 @@ const targets = args.filter((a) => a !== '--expect-fail');
 if (!targets.length) { console.error('usage: mermaid-check.mjs [--expect-fail] <file|dir>...'); process.exit(2); }
 
 const EXT = new Set(['.mmd', '.mermaid', '.md', '.markdown']);
+for (const t of targets) if (!existsSync(t)) { console.error(`no such path: ${t}`); process.exit(2); }
 function walk(p) {
   if (statSync(p).isDirectory()) return readdirSync(p).sort().flatMap((n) => (n === 'node_modules' ? [] : walk(join(p, n))));
   return EXT.has(extname(p)) ? [p] : [];
