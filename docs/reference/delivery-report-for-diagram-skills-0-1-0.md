@@ -70,8 +70,15 @@ separate the two arms on the small fixture.
 - **Iteration 2 (DSKI-15):** harder fixtures where truth checks
   discriminate, three runs per arm, the gaps the first round found, and
   the owner's viewer feedback.
-- **Listing in opum-marketplace:** that changes another repository, so it
-  waits for the owner.
-- **Release:** `dev` has not been promoted to `main`, and no version tag
-  exists.
+- **Listing in opum-marketplace:** the entry and the `v0.1.0` pin were sent
+  to opum-agent, which routed them to opum-doc. Listing is that session's
+  decision, and no PR was opened against opum-marketplace.
+- **Release:** done on 2026-10-06 with the owner's approval. `main` was
+  fast-forwarded to `15469fd` through PR #15, after green checks on that
+  SHA, and tagged `v0.1.0`. The fast-forward made GitHub mark the PR
+  merged, and `delete_branch_on_merge` then deleted `dev`, the PR's head
+  branch, because `main` is this repository's default branch. `dev` was
+  recreated at the same commit; no content was lost. The fleet's fix is to
+  make `dev` the default branch, which GitHub never auto-deletes. That is a
+  repository setting, so it is the owner's call.
 - **Known limitations:** listed in the README.

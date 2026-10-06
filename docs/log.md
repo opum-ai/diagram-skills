@@ -16,6 +16,7 @@
 - 2026-10-06T12:04:32-05:00 36bc410183b091859c306839b7ed134057e34a77 DSKI-11: diagram-plan skill - Quest dependency and milestone views (#11)
 - 2026-10-06T12:06:05-05:00 29bb84ff9ee82985b51485fcc00d52b6485d655c DSKI-12: diagram-data skill - ER diagrams traced to the schema (#12)
 - 2026-10-06T12:10:12-05:00 730c71753757011904054c26e556272c349bef9a DSKI-14: opt-in image export (SVG/PNG) via mmdc (#13)
+- 2026-10-06T12:13:27-05:00 15469fd1fbc1f602508de6131778222f01385b5e DSKI-13: README, plugin validation and the delivery report (#14)
 
 ## docs/reference
 
