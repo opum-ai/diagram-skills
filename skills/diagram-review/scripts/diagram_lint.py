@@ -291,7 +291,7 @@ def lint(d: Diagram, default_level: str = DEFAULT_LEVEL) -> list[Finding]:
             if re.match(r"(subgraph|classDef|class|style|linkStyle|click)\b", s):
                 continue
             unq = re.sub(r'"[^"]*"', '""', s)
-            for m in re.finditer(r"[\w-](\(\(\(|\(\(|\(\[|\[\[|\[\(|\{\{|\[|\(|\{)\s*([^\s\"])", unq):
+            for m in re.finditer(r"[\w-](\(\(\(|\(\(|\(\[|\[\[|\[\(|\{\{|\[|\(|\{)\s*([^\s\"(\[{/\\])", unq):
                 add("quote-label", "error", f"line {i}: node label not quoted (`{m.group(0)}...`); write `id[\"label\"]`")
                 break
             if re.search(r"\|\s*[^\"|\s][^|]*\|", unq):

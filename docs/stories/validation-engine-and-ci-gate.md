@@ -46,12 +46,13 @@ Does the gate stop a broken diagram before it merges?
 flowchart LR
   accTitle: How a diagram passes the gate
   accDescr: A pull request's diagrams are parsed, then linted; a failure at either step blocks the merge.
-  pr["Pull request"] --> parse[Parse check (mermaid 11.17.2)]
+  pr["Pull request"] --> parse["Parse check (mermaid 11.17.2)"]
   parse --> lint["Lint"]
   lint --> merge["Mergeable"]
 ```
 
-This diagram is deliberately broken: the parse-check label is not quoted, so
-its parentheses read as a shape. CI must go red on this commit, and green once
-the label is quoted.
-
+This diagram was committed broken on purpose in `ae16759`: the parse-check
+label was not quoted, so its parentheses read as a shape. CI run
+[37368998996](https://github.com/opum-ai/diagram-skills/actions/runs/37368998996)
+failed at "Parse every Mermaid diagram" on exactly this fence. Quoting the
+label fixed it, and the run on the fix commit is the green half of the proof.

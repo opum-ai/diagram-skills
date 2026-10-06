@@ -159,3 +159,14 @@ def test_mermaid_inside_another_fence_is_content(tmp_path):
     findings = run(tmp_path, text)
     assert findings == [], findings
     assert len(dl.diagrams_in(tmp_path / "doc.md")) == 1
+
+
+def test_compound_shapes_with_quoted_labels_pass(tmp_path):
+    body = GOOD_BODY + '  cust(["Customer"]) --> db[("Orders: Postgres")]\n  db --> sub[["Subroutine"]]\n  sub --> hex{{"Hex"}}\n'
+    assert run(tmp_path, doc(body)) == []
+
+
+def test_compound_shapes_with_unquoted_labels_fail(tmp_path):
+    for shape in ("db[(Orders)]", "cust([Customer])", "sub[[Sub]]", "c((Circle))"):
+        body = GOOD_BODY + f"  shipped --> {shape}\n"
+        assert "quote-label" in rules(run(tmp_path, doc(body))), shape
