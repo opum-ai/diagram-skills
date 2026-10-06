@@ -1,0 +1,792 @@
+{
+  "skill_name": "diagram-skills",
+  "preamble": "You are working in the repository at {WORKSPACE}. It is a git repository with a Quest tracker. Do the task below. When you finish, write your complete final reply to the user - exactly what you would say in chat, including any diagrams - to {OUTPUTS}/answer.md. If the task asks you to change files, change them in {WORKSPACE}.",
+  "components": {
+    "shop": {
+      "customer": {
+        "aliases": [
+          "customer",
+          "shopper",
+          "user",
+          "browser",
+          "buyer",
+          "you",
+          "people",
+          "person"
+        ],
+        "required": false
+      },
+      "system": {
+        "aliases": [
+          "shop",
+          "system",
+          "website",
+          "online store",
+          "store"
+        ],
+        "required": false
+      },
+      "web": {
+        "aliases": [
+          "web",
+          "storefront",
+          "next",
+          "nextjs",
+          "next.js",
+          "frontend",
+          "front end"
+        ],
+        "required": true
+      },
+      "orders": {
+        "aliases": [
+          "orders api",
+          "orders-api",
+          "orders service",
+          "order service",
+          "orders",
+          "fastapi",
+          "api",
+          "backend",
+          "checkout",
+          "order system",
+          "order desk",
+          "order service"
+        ],
+        "required": true
+      },
+      "worker": {
+        "aliases": [
+          "worker",
+          "fulfilment",
+          "fulfillment",
+          "fulfil",
+          "fulfill",
+          "shipping worker",
+          "shipping clerk",
+          "shipping helper",
+          "shipper",
+          "shipping job"
+        ],
+        "required": true
+      },
+      "postgres": {
+        "aliases": [
+          "postgres",
+          "postgresql",
+          "database",
+          "db",
+          "sql",
+          "records",
+          "order records",
+          "data store"
+        ],
+        "required": true
+      },
+      "stripe": {
+        "aliases": [
+          "stripe",
+          "payment provider",
+          "payments provider",
+          "card payments",
+          "payment processor",
+          "card"
+        ],
+        "required": true
+      },
+      "shipengine": {
+        "aliases": [
+          "shipengine",
+          "ship engine",
+          "shipping label",
+          "label provider",
+          "labels",
+          "carrier"
+        ],
+        "required": true
+      },
+      "compose": {
+        "aliases": [
+          "docker compose",
+          "docker-compose",
+          "docker",
+          "compose"
+        ],
+        "required": false
+      },
+      "analytics": {
+        "aliases": [
+          "analytics",
+          "warehouse",
+          "debezium",
+          "change data capture"
+        ],
+        "required": false
+      }
+    },
+    "invented": [
+      "redis",
+      "cache",
+      "kafka",
+      "rabbitmq",
+      "message queue",
+      "load balancer",
+      "nginx",
+      "api gateway",
+      "gateway",
+      "cdn",
+      "elasticsearch",
+      "kubernetes",
+      "auth service",
+      "identity provider",
+      "s3",
+      "inventory",
+      "warehouse service",
+      "email service",
+      "notification",
+      "sendgrid",
+      "cloudfront"
+    ]
+  },
+  "evals": [
+    {
+      "id": 1,
+      "name": "architecture-overview-intermediate",
+      "expected_skill": "diagram-architecture",
+      "level": "intermediate",
+      "setup": [],
+      "prompt": "I'm the new product owner for this shop and I need to understand how it's put together. Can you give me an overview of the system with a diagram I could paste into our docs?",
+      "expected_output": "A container-level diagram of the real parts (web app, orders API, fulfilment worker, Postgres, Stripe, ShipEngine) with a plain-English explanation; no invented components.",
+      "truth": {
+        "kind": "components",
+        "set": "shop",
+        "require_all": true
+      },
+      "assertions": [
+        "Every diagram parses under mermaid 11.17.2",
+        "Every diagram has accTitle and accDescr",
+        "Every diagram stays within the intermediate node cap (12)",
+        "A plain-English explanation of at least 30 words accompanies the diagram",
+        "Every node is a component that exists in the repository",
+        "All six real components are drawn (web, orders API, worker, Postgres, Stripe, ShipEngine)",
+        "No invented components (cache, queue, gateway, ...)"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "architecture-for-cfo-beginner",
+      "expected_skill": "diagram-architecture",
+      "level": "beginner",
+      "setup": [],
+      "prompt": "Our CFO asked what the main pieces of the shop's software are and what outside companies we depend on. She isn't technical. Can you explain it to her with a simple picture?",
+      "expected_output": "One small diagram (7 nodes or fewer) in plain words showing the shop and its outside dependencies (Stripe, ShipEngine), with a short plain explanation.",
+      "truth": {
+        "kind": "components",
+        "set": "shop",
+        "require_all": false,
+        "require": [
+          "stripe",
+          "shipengine"
+        ]
+      },
+      "assertions": [
+        "Every diagram parses under mermaid 11.17.2",
+        "Every diagram has accTitle and accDescr",
+        "Every diagram stays within the beginner node cap (7)",
+        "A plain-English explanation of at least 30 words accompanies the diagram",
+        "Every node is a component that exists in the repository",
+        "Stripe and ShipEngine are both drawn",
+        "No invented components (cache, queue, gateway, ...)"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "order-lifecycle-states",
+      "expected_skill": "diagram-process",
+      "level": "intermediate",
+      "setup": [],
+      "prompt": "What states can an order go through in services/orders? Draw the lifecycle, including what happens when a payment fails.",
+      "expected_output": "A state diagram with exactly the five statuses in states.py and the transitions in ALLOWED, including payment_failed -> paid on retry, and no transition from shipped to refunded.",
+      "truth": {
+        "kind": "states",
+        "states": {
+          "placed": [
+            "placed"
+          ],
+          "paid": [
+            "paid"
+          ],
+          "payment_failed": [
+            "payment failed",
+            "payment_failed",
+            "failed",
+            "declined"
+          ],
+          "shipped": [
+            "shipped"
+          ],
+          "refunded": [
+            "refunded"
+          ]
+        },
+        "required_edges": [
+          [
+            "placed",
+            "paid"
+          ],
+          [
+            "placed",
+            "payment_failed"
+          ],
+          [
+            "payment_failed",
+            "paid"
+          ],
+          [
+            "paid",
+            "shipped"
+          ],
+          [
+            "paid",
+            "refunded"
+          ]
+        ],
+        "forbidden_edges": [
+          [
+            "shipped",
+            "refunded"
+          ],
+          [
+            "placed",
+            "shipped"
+          ],
+          [
+            "placed",
+            "refunded"
+          ],
+          [
+            "payment_failed",
+            "refunded"
+          ]
+        ],
+        "invented": [
+          "cancelled",
+          "canceled",
+          "pending",
+          "processing",
+          "delivered",
+          "returned",
+          "on hold"
+        ]
+      },
+      "assertions": [
+        "Every diagram parses under mermaid 11.17.2",
+        "Every diagram has accTitle and accDescr",
+        "Every diagram stays within the intermediate node cap (12)",
+        "A plain-English explanation of at least 30 words accompanies the diagram",
+        "All five real statuses are drawn and no invented status is",
+        "Every transition allowed in states.py is drawn",
+        "No transition the code forbids is drawn"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "checkout-sequence-advanced",
+      "expected_skill": "diagram-process",
+      "level": "advanced",
+      "setup": [],
+      "prompt": "Draw a sequence diagram of POST /orders from the storefront through the orders API to Stripe and Postgres, including the failure path. I'm a staff engineer, be precise.",
+      "expected_output": "A sequence diagram with the storefront, orders API, Stripe and Postgres, the insert then charge order, and an alt branch for the declined card returning 402 and setting payment_failed.",
+      "truth": {
+        "kind": "sequence",
+        "participants": {
+          "web": [
+            "web",
+            "storefront",
+            "next",
+            "browser",
+            "client",
+            "frontend"
+          ],
+          "orders": [
+            "orders",
+            "api",
+            "fastapi"
+          ],
+          "stripe": [
+            "stripe"
+          ],
+          "postgres": [
+            "postgres",
+            "db",
+            "database"
+          ]
+        },
+        "error_path": [
+          "402",
+          "declin",
+          "payment_failed",
+          "payment failed"
+        ],
+        "invented": [
+          "redis",
+          "cache",
+          "kafka",
+          "queue",
+          "inventory",
+          "stock",
+          "warehouse",
+          "email",
+          "notification",
+          "worker"
+        ]
+      },
+      "assertions": [
+        "Every diagram parses under mermaid 11.17.2",
+        "Every diagram has accTitle and accDescr",
+        "Every diagram stays within the advanced node cap (20)",
+        "A plain-English explanation of at least 30 words accompanies the diagram",
+        "Storefront, orders API, Stripe and Postgres are all participants",
+        "The declined-payment path is drawn (alt/else with 402 or payment_failed)",
+        "No invented participants (inventory, cache, queue, worker, ...)"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "adr-options-intermediate",
+      "expected_skill": "diagram-decision",
+      "level": "intermediate",
+      "setup": [],
+      "prompt": "Make a diagram for ADR 0003 showing the options we considered for getting orders into the analytics warehouse and which one we picked. It's for the steering group.",
+      "expected_output": "An options view with exactly the three options in the ADR, Debezium CDC marked as chosen in text (not only colour), and an explanation of the trade-offs.",
+      "truth": {
+        "kind": "decision",
+        "options": {
+          "batch": [
+            "batch",
+            "nightly",
+            "cron",
+            "export"
+          ],
+          "cdc": [
+            "debezium",
+            "cdc",
+            "change data capture"
+          ],
+          "dual": [
+            "dual"
+          ]
+        },
+        "chosen": "cdc",
+        "invented": [
+          "fivetran",
+          "airbyte",
+          "logical replication",
+          "read replica",
+          "etl tool",
+          "stitch"
+        ]
+      },
+      "assertions": [
+        "Every diagram parses under mermaid 11.17.2",
+        "Every diagram has accTitle and accDescr",
+        "Every diagram stays within the intermediate node cap (12)",
+        "A plain-English explanation of at least 30 words accompanies the diagram",
+        "All three options from the ADR are drawn and no invented option is",
+        "The chosen option is Debezium CDC, marked in text",
+        "No rejected option is marked as chosen"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "adr-for-stakeholder-beginner",
+      "expected_skill": "diagram-decision",
+      "level": "beginner",
+      "setup": [],
+      "prompt": "A non-technical stakeholder asked why we chose the approach in ADR 0003 for the analytics sync. Explain it to them with a simple picture.",
+      "expected_output": "One small diagram in plain words (no Debezium, CDC or WAL jargon in labels) showing the options and the one picked, with a short plain explanation.",
+      "truth": {
+        "kind": "decision",
+        "options": {
+          "batch": [
+            "batch",
+            "nightly",
+            "once a day",
+            "every night",
+            "daily",
+            "export",
+            "once a night",
+            "overnight"
+          ],
+          "cdc": [
+            "debezium",
+            "cdc",
+            "change data capture",
+            "as it happens",
+            "live",
+            "real time",
+            "real-time",
+            "within a minute",
+            "continuous",
+            "stream",
+            "every change",
+            "each change",
+            "pass on",
+            "watch"
+          ],
+          "dual": [
+            "dual",
+            "twice",
+            "both places",
+            "two places",
+            "write to both"
+          ]
+        },
+        "chosen": "cdc",
+        "jargon": [
+          "debezium",
+          "cdc",
+          "wal",
+          "write-ahead",
+          "postgres",
+          "etl"
+        ],
+        "invented": [
+          "fivetran",
+          "airbyte",
+          "logical replication",
+          "read replica"
+        ]
+      },
+      "assertions": [
+        "Every diagram parses under mermaid 11.17.2",
+        "Every diagram has accTitle and accDescr",
+        "Every diagram stays within the beginner node cap (7)",
+        "A plain-English explanation of at least 30 words accompanies the diagram",
+        "All three options from the ADR are drawn and no invented option is",
+        "The chosen option is the live/CDC one, marked in text",
+        "Diagram labels avoid jargon (Debezium, CDC, WAL, Postgres, ETL)"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "launch-blockers-plan",
+      "expected_skill": "diagram-plan",
+      "level": "intermediate",
+      "setup": [],
+      "prompt": "What's still blocking the public launch? Show me a dependency diagram of the work that's left.",
+      "expected_output": "A dependency diagram of the open tasks in the Public launch milestone (SHOP-4 to SHOP-10) with exactly the recorded dependencies, no done tasks, and an explanation naming what can start now and the critical path.",
+      "truth": {
+        "kind": "plan",
+        "expected_tasks": [
+          "SHOP-4",
+          "SHOP-5",
+          "SHOP-6",
+          "SHOP-7",
+          "SHOP-8",
+          "SHOP-9",
+          "SHOP-10"
+        ],
+        "excluded_tasks": [
+          "SHOP-2",
+          "SHOP-3"
+        ],
+        "optional_tasks": [
+          "SHOP-1"
+        ]
+      },
+      "assertions": [
+        "Every diagram parses under mermaid 11.17.2",
+        "Every diagram has accTitle and accDescr",
+        "Every diagram stays within the intermediate node cap (12)",
+        "A plain-English explanation of at least 30 words accompanies the diagram",
+        "Every open launch task is drawn",
+        "No completed task is drawn",
+        "Drawn edges equal the dependencies recorded in Quest"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "payments-epic-plan",
+      "expected_skill": "diagram-plan",
+      "level": "intermediate",
+      "setup": [],
+      "prompt": "Give me a picture of the tasks under the Payments epic and how they depend on each other, with where each one stands.",
+      "expected_output": "A dependency diagram of SHOP-2..SHOP-5 (optionally the SHOP-1 epic) with the recorded dependencies and each task's status shown in text, not only colour.",
+      "truth": {
+        "kind": "plan",
+        "expected_tasks": [
+          "SHOP-2",
+          "SHOP-3",
+          "SHOP-4",
+          "SHOP-5"
+        ],
+        "excluded_tasks": [
+          "SHOP-6",
+          "SHOP-7",
+          "SHOP-8",
+          "SHOP-9",
+          "SHOP-10"
+        ],
+        "optional_tasks": [
+          "SHOP-1"
+        ],
+        "status_in_text": true
+      },
+      "assertions": [
+        "Every diagram parses under mermaid 11.17.2",
+        "Every diagram has accTitle and accDescr",
+        "Every diagram stays within the intermediate node cap (12)",
+        "A plain-English explanation of at least 30 words accompanies the diagram",
+        "Every Payments subtask is drawn and no task outside the epic is",
+        "Drawn edges equal the dependencies recorded in Quest",
+        "Each task's status is written in its label"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "er-diagram-intermediate",
+      "expected_skill": "diagram-data",
+      "level": "intermediate",
+      "setup": [],
+      "prompt": "What does the shop's database look like? I'd like an ER diagram for the onboarding doc.",
+      "expected_output": "An ER diagram of the five tables the migrations leave (not legacy_carts), the four foreign keys, and the coupon link drawn as optional.",
+      "truth": {
+        "kind": "er",
+        "entities": {
+          "customers": [
+            "customers",
+            "customer"
+          ],
+          "orders": [
+            "orders",
+            "order"
+          ],
+          "products": [
+            "products",
+            "product"
+          ],
+          "order_items": [
+            "order_items",
+            "order_item",
+            "orderitem",
+            "order items",
+            "line item",
+            "line_items"
+          ],
+          "coupons": [
+            "coupons",
+            "coupon"
+          ]
+        },
+        "relationships": [
+          [
+            "orders",
+            "customers"
+          ],
+          [
+            "orders",
+            "coupons"
+          ],
+          [
+            "order_items",
+            "orders"
+          ],
+          [
+            "order_items",
+            "products"
+          ]
+        ],
+        "optional": [
+          [
+            "orders",
+            "coupons"
+          ]
+        ],
+        "invented": [
+          "legacy_carts",
+          "users",
+          "payments",
+          "invoices",
+          "carts",
+          "shipments",
+          "addresses",
+          "reviews",
+          "inventory"
+        ]
+      },
+      "assertions": [
+        "Every diagram parses under mermaid 11.17.2",
+        "Every diagram has accTitle and accDescr",
+        "Every diagram stays within the intermediate node cap (12)",
+        "A plain-English explanation of at least 30 words accompanies the diagram",
+        "All five tables are drawn and no invented or dropped table is",
+        "Exactly the four foreign-key relationships are drawn",
+        "The orders-coupons relationship is drawn as optional"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "data-for-support-beginner",
+      "expected_skill": "diagram-data",
+      "level": "beginner",
+      "setup": [],
+      "prompt": "A new support agent wants to know what records the shop keeps about customers and their orders, and how they connect. Keep it simple, with a picture.",
+      "expected_output": "A small diagram (7 nodes or fewer) of the shop's records without columns or keys, in plain words, with a short explanation.",
+      "truth": {
+        "kind": "er",
+        "entities": {
+          "customers": [
+            "customers",
+            "customer"
+          ],
+          "orders": [
+            "orders",
+            "order"
+          ],
+          "products": [
+            "products",
+            "product"
+          ],
+          "order_items": [
+            "order_items",
+            "order_item",
+            "order items",
+            "line item",
+            "items",
+            "item"
+          ],
+          "coupons": [
+            "coupons",
+            "coupon",
+            "discount"
+          ]
+        },
+        "relationships": [],
+        "require": [
+          "customers",
+          "orders"
+        ],
+        "invented": [
+          "legacy_carts",
+          "users",
+          "payments",
+          "invoices",
+          "carts",
+          "shipments",
+          "addresses",
+          "reviews",
+          "inventory"
+        ]
+      },
+      "assertions": [
+        "Every diagram parses under mermaid 11.17.2",
+        "Every diagram has accTitle and accDescr",
+        "Every diagram stays within the beginner node cap (7)",
+        "A plain-English explanation of at least 30 words accompanies the diagram",
+        "Customers and orders are drawn and no invented record type is"
+      ]
+    },
+    {
+      "id": 11,
+      "name": "review-architecture-doc",
+      "expected_skill": "diagram-review",
+      "level": "intermediate",
+      "setup": [
+        "--with-review-docs"
+      ],
+      "prompt": "Can you review the diagram in docs/architecture.md before I merge it?",
+      "expected_output": "A review that says the diagram will not render (unquoted label with parentheses), flags the Redis cache as not present in the repository, notes the missing worker-to-ShipEngine and accessibility fields, and offers a corrected diagram that parses.",
+      "truth": {
+        "kind": "review",
+        "must_flag": [
+          [
+            "redis",
+            "cache"
+          ],
+          [
+            "quote",
+            "parenthes",
+            "render",
+            "parse",
+            "syntax"
+          ]
+        ],
+        "corrected_must_not_contain": [
+          "redis",
+          "cache"
+        ]
+      },
+      "assertions": [
+        "The review flags the Redis cache as not in the repository",
+        "The review identifies the unquoted label with parentheses as why it does not render",
+        "A corrected diagram is offered and it parses",
+        "The corrected diagram drops the cache",
+        "The corrected diagram has accTitle and accDescr"
+      ]
+    },
+    {
+      "id": 12,
+      "name": "fix-order-flow-doc",
+      "expected_skill": "diagram-review",
+      "level": "intermediate",
+      "setup": [
+        "--with-review-docs"
+      ],
+      "prompt": "The diagram in docs/order-flow.md won't render on GitHub. Please fix it.",
+      "expected_output": "docs/order-flow.md now parses, keeps the five real statuses and their transitions, and gains accTitle/accDescr; the lowercase `end` node and unquoted parentheses are gone.",
+      "truth": {
+        "kind": "fix",
+        "file": "docs/order-flow.md",
+        "states": {
+          "placed": [
+            "placed"
+          ],
+          "paid": [
+            "paid"
+          ],
+          "payment_failed": [
+            "payment failed",
+            "payment_failed",
+            "failed",
+            "declined"
+          ],
+          "shipped": [
+            "shipped"
+          ],
+          "refunded": [
+            "refunded"
+          ]
+        },
+        "required_edges": [
+          [
+            "placed",
+            "paid"
+          ],
+          [
+            "placed",
+            "payment_failed"
+          ],
+          [
+            "payment_failed",
+            "paid"
+          ],
+          [
+            "paid",
+            "shipped"
+          ],
+          [
+            "paid",
+            "refunded"
+          ]
+        ]
+      },
+      "assertions": [
+        "docs/order-flow.md now parses under mermaid 11.17.2",
+        "docs/order-flow.md diagrams have accTitle and accDescr",
+        "The fixed diagram keeps every real status",
+        "The fixed diagram keeps every real transition"
+      ]
+    }
+  ]
+}

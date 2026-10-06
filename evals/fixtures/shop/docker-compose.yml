@@ -1,0 +1,21 @@
+services:
+  web:
+    build: ./apps/web
+    environment:
+      ORDERS_URL: http://orders:8000
+    ports: ["3000:3000"]
+  orders:
+    build: ./services/orders
+    environment:
+      DATABASE_URL: postgresql://shop:shop@postgres:5432/shop
+      STRIPE_API_KEY: ${STRIPE_API_KEY}
+  worker:
+    build: ./services/worker
+    environment:
+      DATABASE_URL: postgresql://shop:shop@postgres:5432/shop
+      SHIPENGINE_API_KEY: ${SHIPENGINE_API_KEY}
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: shop
+      POSTGRES_PASSWORD: shop

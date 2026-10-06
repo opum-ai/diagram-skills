@@ -1,0 +1,1285 @@
+{
+  "metadata": {
+    "skill_name": "diagram-skills",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-10-06T16:49:59Z",
+    "evals_run": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "runs_per_configuration": 1,
+    "model": "claude-opus-5-5 (subagents, general-purpose)"
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 111.9,
+        "tokens": 47507,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Every diagram parses under mermaid 11.17.2",
+          "passed": true,
+          "evidence": "1/1 as expected, 0 environment errors (mermaid 11.17.2, node v24.20.0)"
+        },
+        {
+          "text": "Every diagram has accTitle and accDescr",
+          "passed": true,
+          "evidence": "1 diagram(s) carry both"
+        },
+        {
+          "text": "Every diagram stays within the intermediate node cap (12)",
+          "passed": true,
+          "evidence": "node counts [7]"
+        },
+        {
+          "text": "A plain-English explanation of at least 30 words accompanies the diagram",
+          "passed": true,
+          "evidence": "prose words around each diagram: [571]"
+        },
+        {
+          "text": "Every node is a component that exists in the repository",
+          "passed": true,
+          "evidence": "matched: ['customer', 'orders', 'postgres', 'shipengine', 'stripe', 'web', 'worker']"
+        },
+        {
+          "text": "All six real components are drawn (web, orders API, worker, Postgres, Stripe, ShipEngine)",
+          "passed": true,
+          "evidence": "all present"
+        },
+        {
+          "text": "No invented components (cache, queue, gateway, ...)",
+          "passed": true,
+          "evidence": "none"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 74.9,
+        "tokens": 41376,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Every diagram parses under mermaid 11.17.2",
+          "passed": true,
+          "evidence": "1/1 as expected, 0 environment errors (mermaid 11.17.2, node v24.20.0)"
+        },
+        {
+          "text": "Every diagram has accTitle and accDescr",
+          "passed": true,
+          "evidence": "1 diagram(s) carry both"
+        },
+        {
+          "text": "Every diagram stays within the beginner node cap (7)",
+          "passed": true,
+          "evidence": "node counts [7]"
+        },
+        {
+          "text": "A plain-English explanation of at least 30 words accompanies the diagram",
+          "passed": true,
+          "evidence": "prose words around each diagram: [593]"
+        },
+        {
+          "text": "Every node is a component that exists in the repository",
+          "passed": true,
+          "evidence": "matched: ['customer', 'orders', 'postgres', 'shipengine', 'stripe', 'web', 'worker']"
+        },
+        {
+          "text": "Stripe and ShipEngine are both drawn",
+          "passed": true,
+          "evidence": "both present"
+        },
+        {
+          "text": "No invented components (cache, queue, gateway, ...)",
+          "passed": true,
+          "evidence": "none"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 81.0,
+        "tokens": 42443,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Every diagram parses under mermaid 11.17.2",
+          "passed": true,
+          "evidence": "1/1 as expected, 0 environment errors (mermaid 11.17.2, node v24.20.0)"
+        },
+        {
+          "text": "Every diagram has accTitle and accDescr",
+          "passed": true,
+          "evidence": "1 diagram(s) carry both"
+        },
+        {
+          "text": "Every diagram stays within the intermediate node cap (12)",
+          "passed": true,
+          "evidence": "node counts [5]"
+        },
+        {
+          "text": "A plain-English explanation of at least 30 words accompanies the diagram",
+          "passed": true,
+          "evidence": "prose words around each diagram: [464]"
+        },
+        {
+          "text": "All five real statuses are drawn and no invented status is",
+          "passed": true,
+          "evidence": "missing []; invented []"
+        },
+        {
+          "text": "Every transition allowed in states.py is drawn",
+          "passed": true,
+          "evidence": "drawn [('paid', 'refunded'), ('paid', 'shipped'), ('payment_failed', 'paid'), ('placed', 'paid'), ('placed', 'payment_failed')]"
+        },
+        {
+          "text": "No transition the code forbids is drawn",
+          "passed": true,
+          "evidence": "none"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 140.4,
+        "tokens": 50192,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Every diagram parses under mermaid 11.17.2",
+          "passed": true,
+          "evidence": "1/1 as expected, 0 environment errors (mermaid 11.17.2, node v24.20.0)"
+        },
+        {
+          "text": "Every diagram has accTitle and accDescr",
+          "passed": true,
+          "evidence": "1 diagram(s) carry both"
+        },
+        {
+          "text": "Every diagram stays within the advanced node cap (20)",
+          "passed": true,
+          "evidence": "node counts [5]"
+        },
+        {
+          "text": "A plain-English explanation of at least 30 words accompanies the diagram",
+          "passed": true,
+          "evidence": "prose words around each diagram: [661]"
+        },
+        {
+          "text": "Storefront, orders API, Stripe and Postgres are all participants",
+          "passed": true,
+          "evidence": "all present"
+        },
+        {
+          "text": "The declined-payment path is drawn (alt/else with 402 or payment_failed)",
+          "passed": true,
+          "evidence": "alt/opt/break block with a decline marker"
+        },
+        {
+          "text": "No invented participants (inventory, cache, queue, worker, ...)",
+          "passed": true,
+          "evidence": "none"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 58.3,
+        "tokens": 35577,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Every diagram parses under mermaid 11.17.2",
+          "passed": true,
+          "evidence": "1/1 as expected, 0 environment errors (mermaid 11.17.2, node v24.20.0)"
+        },
+        {
+          "text": "Every diagram has accTitle and accDescr",
+          "passed": true,
+          "evidence": "1 diagram(s) carry both"
+        },
+        {
+          "text": "Every diagram stays within the intermediate node cap (12)",
+          "passed": true,
+          "evidence": "node counts [4]"
+        },
+        {
+          "text": "A plain-English explanation of at least 30 words accompanies the diagram",
+          "passed": true,
+          "evidence": "prose words around each diagram: [376]"
+        },
+        {
+          "text": "All three options from the ADR are drawn and no invented option is",
+          "passed": true,
+          "evidence": "missing []; invented []"
+        },
+        {
+          "text": "The chosen option is Debezium CDC, marked in text",
+          "passed": true,
+          "evidence": "options marked chosen in text: ['cdc']"
+        },
+        {
+          "text": "No rejected option is marked as chosen",
+          "passed": true,
+          "evidence": "none"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 62.6,
+        "tokens": 34432,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Every diagram parses under mermaid 11.17.2",
+          "passed": true,
+          "evidence": "1/1 as expected, 0 environment errors (mermaid 11.17.2, node v24.20.0)"
+        },
+        {
+          "text": "Every diagram has accTitle and accDescr",
+          "passed": true,
+          "evidence": "1 diagram(s) carry both"
+        },
+        {
+          "text": "Every diagram stays within the beginner node cap (7)",
+          "passed": true,
+          "evidence": "node counts [4]"
+        },
+        {
+          "text": "A plain-English explanation of at least 30 words accompanies the diagram",
+          "passed": true,
+          "evidence": "prose words around each diagram: [397]"
+        },
+        {
+          "text": "All three options from the ADR are drawn and no invented option is",
+          "passed": true,
+          "evidence": "missing []; invented []"
+        },
+        {
+          "text": "The chosen option is the live/CDC one, marked in text",
+          "passed": true,
+          "evidence": "options marked chosen in text: ['cdc']"
+        },
+        {
+          "text": "Diagram labels avoid jargon (Debezium, CDC, WAL, Postgres, ETL)",
+          "passed": true,
+          "evidence": "none"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 47.8,
+        "tokens": 32567,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Every diagram parses under mermaid 11.17.2",
+          "passed": true,
+          "evidence": "1/1 as expected, 0 environment errors (mermaid 11.17.2, node v24.20.0)"
+        },
+        {
+          "text": "Every diagram has accTitle and accDescr",
+          "passed": true,
+          "evidence": "1 diagram(s) carry both"
+        },
+        {
+          "text": "Every diagram stays within the intermediate node cap (12)",
+          "passed": true,
+          "evidence": "node counts [7]"
+        },
+        {
+          "text": "A plain-English explanation of at least 30 words accompanies the diagram",
+          "passed": true,
+          "evidence": "prose words around each diagram: [401]"
+        },
+        {
+          "text": "Every open launch task is drawn",
+          "passed": true,
+          "evidence": "all drawn"
+        },
+        {
+          "text": "No completed task is drawn",
+          "passed": true,
+          "evidence": "none"
+        },
+        {
+          "text": "Drawn edges equal the dependencies recorded in Quest",
+          "passed": true,
+          "evidence": "missing []; not in Quest []"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 8,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 49.0,
+        "tokens": 30289,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Every diagram parses under mermaid 11.17.2",
+          "passed": true,
+          "evidence": "1/1 as expected, 0 environment errors (mermaid 11.17.2, node v24.20.0)"
+        },
+        {
+          "text": "Every diagram has accTitle and accDescr",
+          "passed": true,
+          "evidence": "1 diagram(s) carry both"
+        },
+        {
+          "text": "Every diagram stays within the intermediate node cap (12)",
+          "passed": true,
+          "evidence": "node counts [4]"
+        },
+        {
+          "text": "A plain-English explanation of at least 30 words accompanies the diagram",
+          "passed": true,
+          "evidence": "prose words around each diagram: [307]"
+        },
+        {
+          "text": "Every Payments subtask is drawn and no task outside the epic is",
+          "passed": true,
+          "evidence": "missing []; extra []"
+        },
+        {
+          "text": "Drawn edges equal the dependencies recorded in Quest",
+          "passed": true,
+          "evidence": "missing []; not in Quest []"
+        },
+        {
+          "text": "Each task's status is written in its label",
+          "passed": true,
+          "evidence": "every task label carries its status"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 9,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 7,
+        "failed": 0,
+        "total": 7,
+        "time_seconds": 98.3,
+        "tokens": 39924,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Every diagram parses under mermaid 11.17.2",
+          "passed": true,
+          "evidence": "1/1 as expected, 0 environment errors (mermaid 11.17.2, node v24.20.0)"
+        },
+        {
+          "text": "Every diagram has accTitle and accDescr",
+          "passed": true,
+          "evidence": "1 diagram(s) carry both"
+        },
+        {
+          "text": "Every diagram stays within the intermediate node cap (12)",
+          "passed": true,
+          "evidence": "node counts [5]"
+        },
+        {
+          "text": "A plain-English explanation of at least 30 words accompanies the diagram",
+          "passed": true,
+          "evidence": "prose words around each diagram: [540]"
+        },
+        {
+          "text": "All five tables are drawn and no invented or dropped table is",
+          "passed": true,
+          "evidence": "missing []; invented []"
+        },
+        {
+          "text": "Exactly the four foreign-key relationships are drawn",
+          "passed": true,
+          "evidence": "missing []; extra []"
+        },
+        {
+          "text": "The orders-coupons relationship is drawn as optional",
+          "passed": true,
+          "evidence": "zero-or-one marker present"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 10,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 61.5,
+        "tokens": 34494,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Every diagram parses under mermaid 11.17.2",
+          "passed": true,
+          "evidence": "1/1 as expected, 0 environment errors (mermaid 11.17.2, node v24.20.0)"
+        },
+        {
+          "text": "Every diagram has accTitle and accDescr",
+          "passed": true,
+          "evidence": "1 diagram(s) carry both"
+        },
+        {
+          "text": "Every diagram stays within the beginner node cap (7)",
+          "passed": true,
+          "evidence": "node counts [5]"
+        },
+        {
+          "text": "A plain-English explanation of at least 30 words accompanies the diagram",
+          "passed": true,
+          "evidence": "prose words around each diagram: [311]"
+        },
+        {
+          "text": "Customers and orders are drawn and no invented record type is",
+          "passed": true,
+          "evidence": "missing []; invented []"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 11,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 72.4,
+        "tokens": 41203,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The review flags the Redis cache as not in the repository",
+          "passed": true,
+          "evidence": "flagged"
+        },
+        {
+          "text": "The review identifies the unquoted label with parentheses as why it does not render",
+          "passed": true,
+          "evidence": "names quoting or parentheses"
+        },
+        {
+          "text": "A corrected diagram is offered and it parses",
+          "passed": true,
+          "evidence": "1/1 as expected, 0 environment errors (mermaid 11.17.2, node v24.20.0)"
+        },
+        {
+          "text": "The corrected diagram drops the cache",
+          "passed": true,
+          "evidence": "no cache"
+        },
+        {
+          "text": "The corrected diagram has accTitle and accDescr",
+          "passed": true,
+          "evidence": "present"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 12,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 4,
+        "failed": 0,
+        "total": 4,
+        "time_seconds": 82.5,
+        "tokens": 39828,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "docs/order-flow.md now parses under mermaid 11.17.2",
+          "passed": true,
+          "evidence": "1/1 as expected, 0 environment errors (mermaid 11.17.2, node v24.20.0)"
+        },
+        {
+          "text": "docs/order-flow.md diagrams have accTitle and accDescr",
+          "passed": true,
+          "evidence": "present"
+        },
+        {
+          "text": "The fixed diagram keeps every real status",
+          "passed": true,
+          "evidence": "all five present"
+        },
+        {
+          "text": "The fixed diagram keeps every real transition",
+          "passed": true,
+          "evidence": "drawn [('paid', 'refunded'), ('paid', 'shipped'), ('payment_failed', 'paid'), ('placed', 'paid'), ('placed', 'payment_failed')]"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.7143,
+        "passed": 5,
+        "failed": 2,
+        "total": 7,
+        "time_seconds": 55.6,
+        "tokens": 27968,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Every diagram parses under mermaid 11.17.2",
+          "passed": true,
+          "evidence": "2/2 as expected, 0 environment errors (mermaid 11.17.2, node v24.20.0)"
+        },
+        {
+          "text": "Every diagram has accTitle and accDescr",
+          "passed": false,
+          "evidence": "missing in ['<workspace>/iteration-1/eval-01-architecture-overview-intermediate/without_skill/outputs/answer.md:5', '<workspace>/iteration-1/eval-01-architecture-overview-intermediate/without_skill/outputs/answer.md:48']"
+        },
+        {
+          "text": "Every diagram stays within the intermediate node cap (12)",
+          "passed": true,
+          "evidence": "node counts [8, 5]"
+        },
+        {
+          "text": "A plain-English explanation of at least 30 words accompanies the diagram",
+          "passed": false,
+          "evidence": "prose words around each diagram: [28, 175]"
+        },
+        {
+          "text": "Every node is a component that exists in the repository",
+          "passed": true,
+          "evidence": "matched: ['analytics', 'customer', 'orders', 'postgres', 'shipengine', 'stripe', 'web', 'worker']"
+        },
+        {
+          "text": "All six real components are drawn (web, orders API, worker, Postgres, Stripe, ShipEngine)",
+          "passed": true,
+          "evidence": "all present"
+        },
+        {
+          "text": "No invented components (cache, queue, gateway, ...)",
+          "passed": true,
+          "evidence": "none"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8571,
+        "passed": 6,
+        "failed": 1,
+        "total": 7,
+        "time_seconds": 48.8,
+        "tokens": 26736,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Every diagram parses under mermaid 11.17.2",
+          "passed": true,
+          "evidence": "1/1 as expected, 0 environment errors (mermaid 11.17.2, node v24.20.0)"
+        },
+        {
+          "text": "Every diagram has accTitle and accDescr",
+          "passed": false,
+          "evidence": "missing in ['<workspace>/iteration-1/eval-02-architecture-for-cfo-beginner/without_skill/outputs/answer.md:9']"
+        },
+        {
+          "text": "Every diagram stays within the beginner node cap (7)",
+          "passed": true,
+          "evidence": "node counts [7]"
+        },
+        {
+          "text": "A plain-English explanation of at least 30 words accompanies the diagram",
+          "passed": true,
+          "evidence": "prose words around each diagram: [519]"
+        },
+        {
+          "text": "Every node is a component that exists in the repository",
+          "passed": true,
+          "evidence": "matched: ['customer', 'orders', 'postgres', 'shipengine', 'stripe', 'web', 'worker']"
+        },
+        {
+          "text": "Stripe and ShipEngine are both drawn",
+          "passed": true,
+          "evidence": "both present"
+        },
+        {
+          "text": "No invented components (cache, queue, gateway, ...)",
+          "passed": true,
+          "evidence": "none"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8571,
+        "passed": 6,
+        "failed": 1,
+        "total": 7,
+        "time_seconds": 46.0,
+        "tokens": 25681,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Every diagram parses under mermaid 11.17.2",
+          "passed": true,
+          "evidence": "1/1 as expected, 0 environment errors (mermaid 11.17.2, node v24.20.0)"
+        },
+        {
+          "text": "Every diagram has accTitle and accDescr",
+          "passed": false,
+          "evidence": "missing in ['<workspace>/iteration-1/eval-03-order-lifecycle-states/without_skill/outputs/answer.md:3']"
+        },
+        {
+          "text": "Every diagram stays within the intermediate node cap (12)",
+          "passed": true,
+          "evidence": "node counts [5]"
+        },
+        {
+          "text": "A plain-English explanation of at least 30 words accompanies the diagram",
+          "passed": true,
+          "evidence": "prose words around each diagram: [608]"
+        },
+        {
+          "text": "All five real statuses are drawn and no invented status is",
+          "passed": true,
+          "evidence": "missing []; invented []"
+        },
+        {
+          "text": "Every transition allowed in states.py is drawn",
+          "passed": true,
+          "evidence": "drawn [('paid', 'refunded'), ('paid', 'shipped'), ('payment_failed', 'paid'), ('placed', 'paid'), ('placed', 'payment_failed')]"
+        },
+        {
+          "text": "No transition the code forbids is drawn",
+          "passed": true,
+          "evidence": "none"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8571,
+        "passed": 6,
+        "failed": 1,
+        "total": 7,
+        "time_seconds": 138.6,
+        "tokens": 37006,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Every diagram parses under mermaid 11.17.2",
+          "passed": true,
+          "evidence": "1/1 as expected, 0 environment errors (mermaid 11.17.2, node v24.20.0)"
+        },
+        {
+          "text": "Every diagram has accTitle and accDescr",
+          "passed": false,
+          "evidence": "missing in ['<workspace>/iteration-1/eval-04-checkout-sequence-advanced/without_skill/outputs/answer.md:3']"
+        },
+        {
+          "text": "Every diagram stays within the advanced node cap (20)",
+          "passed": true,
+          "evidence": "node counts [4]"
+        },
+        {
+          "text": "A plain-English explanation of at least 30 words accompanies the diagram",
+          "passed": true,
+          "evidence": "prose words around each diagram: [706]"
+        },
+        {
+          "text": "Storefront, orders API, Stripe and Postgres are all participants",
+          "passed": true,
+          "evidence": "all present"
+        },
+        {
+          "text": "The declined-payment path is drawn (alt/else with 402 or payment_failed)",
+          "passed": true,
+          "evidence": "alt/opt/break block with a decline marker"
+        },
+        {
+          "text": "No invented participants (inventory, cache, queue, worker, ...)",
+          "passed": true,
+          "evidence": "none"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 5,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8571,
+        "passed": 6,
+        "failed": 1,
+        "total": 7,
+        "time_seconds": 81.5,
+        "tokens": 30764,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Every diagram parses under mermaid 11.17.2",
+          "passed": true,
+          "evidence": "1/1 as expected, 0 environment errors (mermaid 11.17.2, node v24.20.0)"
+        },
+        {
+          "text": "Every diagram has accTitle and accDescr",
+          "passed": false,
+          "evidence": "missing in ['<workspace>/iteration-1/eval-05-adr-options-intermediate/without_skill/outputs/answer.md:3']"
+        },
+        {
+          "text": "Every diagram stays within the intermediate node cap (12)",
+          "passed": true,
+          "evidence": "node counts [5]"
+        },
+        {
+          "text": "A plain-English explanation of at least 30 words accompanies the diagram",
+          "passed": true,
+          "evidence": "prose words around each diagram: [217]"
+        },
+        {
+          "text": "All three options from the ADR are drawn and no invented option is",
+          "passed": true,
+          "evidence": "missing []; invented []"
+        },
+        {
+          "text": "The chosen option is Debezium CDC, marked in text",
+          "passed": true,
+          "evidence": "options marked chosen in text: ['cdc']"
+        },
+        {
+          "text": "No rejected option is marked as chosen",
+          "passed": true,
+          "evidence": "none"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 6,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.5714,
+        "passed": 4,
+        "failed": 3,
+        "total": 7,
+        "time_seconds": 34.0,
+        "tokens": 21955,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Every diagram parses under mermaid 11.17.2",
+          "passed": true,
+          "evidence": "1/1 as expected, 0 environment errors (mermaid 11.17.2, node v24.20.0)"
+        },
+        {
+          "text": "Every diagram has accTitle and accDescr",
+          "passed": false,
+          "evidence": "missing in ['<workspace>/iteration-1/eval-06-adr-for-stakeholder-beginner/without_skill/outputs/answer.md:11']"
+        },
+        {
+          "text": "Every diagram stays within the beginner node cap (7)",
+          "passed": true,
+          "evidence": "node counts [5]"
+        },
+        {
+          "text": "A plain-English explanation of at least 30 words accompanies the diagram",
+          "passed": true,
+          "evidence": "prose words around each diagram: [328]"
+        },
+        {
+          "text": "All three options from the ADR are drawn and no invented option is",
+          "passed": false,
+          "evidence": "missing ['batch', 'cdc', 'dual']; invented []"
+        },
+        {
+          "text": "The chosen option is the live/CDC one, marked in text",
+          "passed": false,
+          "evidence": "options marked chosen in text: []"
+        },
+        {
+          "text": "Diagram labels avoid jargon (Debezium, CDC, WAL, Postgres, ETL)",
+          "passed": true,
+          "evidence": "none"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 7,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.7143,
+        "passed": 5,
+        "failed": 2,
+        "total": 7,
+        "time_seconds": 59.7,
+        "tokens": 32569,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Every diagram parses under mermaid 11.17.2",
+          "passed": true,
+          "evidence": "1/1 as expected, 0 environment errors (mermaid 11.17.2, node v24.20.0)"
+        },
+        {
+          "text": "Every diagram has accTitle and accDescr",
+          "passed": false,
+          "evidence": "missing in ['<workspace>/iteration-1/eval-07-launch-blockers-plan/without_skill/outputs/answer.md:3']"
+        },
+        {
+          "text": "Every diagram stays within the intermediate node cap (12)",
+          "passed": true,
+          "evidence": "node counts [9]"
+        },
+        {
+          "text": "A plain-English explanation of at least 30 words accompanies the diagram",
+          "passed": true,
+          "evidence": "prose words around each diagram: [440]"
+        },
+        {
+          "text": "Every open launch task is drawn",
+          "passed": true,
+          "evidence": "all drawn"
+        },
+        {
+          "text": "No completed task is drawn",
+          "passed": false,
+          "evidence": "done tasks drawn: ['SHOP-2', 'SHOP-3']"
+        },
+        {
+          "text": "Drawn edges equal the dependencies recorded in Quest",
+          "passed": true,
+          "evidence": "missing []; not in Quest []"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 8,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.7143,
+        "passed": 5,
+        "failed": 2,
+        "total": 7,
+        "time_seconds": 41.5,
+        "tokens": 25304,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Every diagram parses under mermaid 11.17.2",
+          "passed": true,
+          "evidence": "1/1 as expected, 0 environment errors (mermaid 11.17.2, node v24.20.0)"
+        },
+        {
+          "text": "Every diagram has accTitle and accDescr",
+          "passed": false,
+          "evidence": "missing in ['<workspace>/iteration-1/eval-08-payments-epic-plan/without_skill/outputs/answer.md:3']"
+        },
+        {
+          "text": "Every diagram stays within the intermediate node cap (12)",
+          "passed": true,
+          "evidence": "node counts [7]"
+        },
+        {
+          "text": "A plain-English explanation of at least 30 words accompanies the diagram",
+          "passed": true,
+          "evidence": "prose words around each diagram: [320]"
+        },
+        {
+          "text": "Every Payments subtask is drawn and no task outside the epic is",
+          "passed": false,
+          "evidence": "missing []; extra ['SHOP-10', 'SHOP-8', 'SHOP-9']"
+        },
+        {
+          "text": "Drawn edges equal the dependencies recorded in Quest",
+          "passed": true,
+          "evidence": "missing []; not in Quest []"
+        },
+        {
+          "text": "Each task's status is written in its label",
+          "passed": true,
+          "evidence": "every task label carries its status"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 9,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8571,
+        "passed": 6,
+        "failed": 1,
+        "total": 7,
+        "time_seconds": 50.7,
+        "tokens": 26405,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Every diagram parses under mermaid 11.17.2",
+          "passed": true,
+          "evidence": "1/1 as expected, 0 environment errors (mermaid 11.17.2, node v24.20.0)"
+        },
+        {
+          "text": "Every diagram has accTitle and accDescr",
+          "passed": false,
+          "evidence": "missing in ['<workspace>/iteration-1/eval-09-er-diagram-intermediate/without_skill/outputs/answer.md:3']"
+        },
+        {
+          "text": "Every diagram stays within the intermediate node cap (12)",
+          "passed": true,
+          "evidence": "node counts [5]"
+        },
+        {
+          "text": "A plain-English explanation of at least 30 words accompanies the diagram",
+          "passed": true,
+          "evidence": "prose words around each diagram: [441]"
+        },
+        {
+          "text": "All five tables are drawn and no invented or dropped table is",
+          "passed": true,
+          "evidence": "missing []; invented []"
+        },
+        {
+          "text": "Exactly the four foreign-key relationships are drawn",
+          "passed": true,
+          "evidence": "missing []; extra []"
+        },
+        {
+          "text": "The orders-coupons relationship is drawn as optional",
+          "passed": true,
+          "evidence": "zero-or-one marker present"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 10,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 4,
+        "failed": 1,
+        "total": 5,
+        "time_seconds": 36.2,
+        "tokens": 24134,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Every diagram parses under mermaid 11.17.2",
+          "passed": true,
+          "evidence": "1/1 as expected, 0 environment errors (mermaid 11.17.2, node v24.20.0)"
+        },
+        {
+          "text": "Every diagram has accTitle and accDescr",
+          "passed": false,
+          "evidence": "missing in ['<workspace>/iteration-1/eval-10-data-for-support-beginner/without_skill/outputs/answer.md:5']"
+        },
+        {
+          "text": "Every diagram stays within the beginner node cap (7)",
+          "passed": true,
+          "evidence": "node counts [5]"
+        },
+        {
+          "text": "A plain-English explanation of at least 30 words accompanies the diagram",
+          "passed": true,
+          "evidence": "prose words around each diagram: [55]"
+        },
+        {
+          "text": "Customers and orders are drawn and no invented record type is",
+          "passed": true,
+          "evidence": "missing []; invented []"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 11,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 4,
+        "failed": 1,
+        "total": 5,
+        "time_seconds": 83.8,
+        "tokens": 34573,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "The review flags the Redis cache as not in the repository",
+          "passed": true,
+          "evidence": "flagged"
+        },
+        {
+          "text": "The review identifies the unquoted label with parentheses as why it does not render",
+          "passed": true,
+          "evidence": "names quoting or parentheses"
+        },
+        {
+          "text": "A corrected diagram is offered and it parses",
+          "passed": true,
+          "evidence": "1/1 as expected, 0 environment errors (mermaid 11.17.2, node v24.20.0)"
+        },
+        {
+          "text": "The corrected diagram drops the cache",
+          "passed": true,
+          "evidence": "no cache"
+        },
+        {
+          "text": "The corrected diagram has accTitle and accDescr",
+          "passed": false,
+          "evidence": "missing"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 12,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.75,
+        "passed": 3,
+        "failed": 1,
+        "total": 4,
+        "time_seconds": 71.4,
+        "tokens": 28002,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "docs/order-flow.md now parses under mermaid 11.17.2",
+          "passed": true,
+          "evidence": "1/1 as expected, 0 environment errors (mermaid 11.17.2, node v24.20.0)"
+        },
+        {
+          "text": "docs/order-flow.md diagrams have accTitle and accDescr",
+          "passed": false,
+          "evidence": "missing"
+        },
+        {
+          "text": "The fixed diagram keeps every real status",
+          "passed": true,
+          "evidence": "all five present"
+        },
+        {
+          "text": "The fixed diagram keeps every real transition",
+          "passed": true,
+          "evidence": "drawn [('paid', 'refunded'), ('paid', 'shipped'), ('payment_failed', 'paid'), ('placed', 'paid'), ('placed', 'payment_failed')]"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 78.3833,
+        "stddev": 27.2598,
+        "min": 47.8,
+        "max": 140.4
+      },
+      "tokens": {
+        "mean": 39152.6667,
+        "stddev": 5965.0118,
+        "min": 30289,
+        "max": 50192
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.7791,
+        "stddev": 0.0894,
+        "min": 0.5714,
+        "max": 0.8571
+      },
+      "time_seconds": {
+        "mean": 62.3167,
+        "stddev": 29.0521,
+        "min": 34.0,
+        "max": 138.6
+      },
+      "tokens": {
+        "mean": 28424.75,
+        "stddev": 4461.3469,
+        "min": 21955,
+        "max": 37006
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.22",
+      "time_seconds": "+16.1",
+      "tokens": "+10728"
+    }
+  },
+  "notes": [
+    "One run per configuration per eval: the \u00b1 figures are spread across the 12 evals, not run-to-run variance. A second round should run 3 per arm before any delta is quoted as stable.",
+    "12 of the baseline's 17 failed expectations are missing accTitle/accDescr. Accessibility fields are the dominant discriminator.",
+    "Truth assertions (every node real, no invented components, exact Quest edges, FK set) did not discriminate: the baseline read this small fixture accurately too. The fixture has 7 components and no misleading docs, so invention pressure is low; harder fixtures (larger repos, stale docs that name removed services) are needed to test the truth check's value.",
+    "Remaining real deltas: scoping plan views (baseline drew completed tasks and tasks outside the epic) and marking the chosen option in text; one beginner baseline drew the chosen approach only, with no options.",
+    "Cost: with-skill runs used about 38% more tokens and 26% more time (they run the three checks and read references).",
+    "Not measured: correctness of the prose. The eval-09 with-skill answer says legacy_carts is created and dropped in 001_init.sql; it is 002_coupons.sql. Objective graders do not read prose claims.",
+    "The grader was fixed twice during the round (node classification; quoted labels with parentheses were truncated). Both fixes were applied to every run of both arms before the final grading."
+  ]
+}

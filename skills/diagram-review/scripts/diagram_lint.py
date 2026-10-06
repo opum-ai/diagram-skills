@@ -172,6 +172,19 @@ def flow_nodes(src: str) -> tuple[set[str], set[str]]:
     return nodes - subgraphs, subgraphs
 
 
+def flow_edges(src: str) -> set[tuple[str, str]]:
+    """Directed edges of a flowchart, left to right, as (from, to) node ids."""
+    edges = set()
+    for _, s in _body_lines(src):
+        if FLOW_SKIP.match(s) or s.startswith("subgraph"):
+            continue
+        parts = [p.strip().strip(";") for p in ARROW_RE.split(_strip_flow_line(s))]
+        ids = [p for p in parts if re.fullmatch(r"[A-Za-z0-9_][\w-]*", p)]
+        if len(ids) == len(parts):
+            edges.update(zip(ids, ids[1:]))
+    return edges
+
+
 def sequence_nodes(src: str) -> set[str]:
     nodes = set()
     for _, s in _body_lines(src):
