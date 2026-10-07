@@ -18,6 +18,7 @@
 - 2026-10-06T12:10:12-05:00 730c71753757011904054c26e556272c349bef9a DSKI-14: opt-in image export (SVG/PNG) via mmdc (#13)
 - 2026-10-06T12:13:27-05:00 15469fd1fbc1f602508de6131778222f01385b5e DSKI-13: README, plugin validation and the delivery report (#14)
 - 2026-10-06T14:50:29-05:00 3a613d874264e23522c279e55acfe2050c546430 DSKI-16: record the 0.1.0 release in the delivery report (#16)
+- 2026-10-06T19:36:00-05:00 8b7f59ea110400e077fc95746829916e278947d0 chore(DSKI-17): add plugin validate and Tracker integrity CI jobs (#18)
 
 ## docs/reference
 
