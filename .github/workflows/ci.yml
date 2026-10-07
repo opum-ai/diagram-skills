@@ -68,3 +68,56 @@ jobs:
         run: |
           quest agents --check --target claude
           lore agents --check
+
+  plugin-validate:
+    name: plugin validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      # Unpinned on purpose: the manifest has to validate against the Claude Code
+      # that users install today, not the one that was current when this was written.
+      - name: Install Claude Code
+        run: npm install -g @anthropic-ai/claude-code
+      - name: claude plugin validate
+        run: claude plugin validate .
+
+  tracker:
+    name: Tracker integrity
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      # The quest version is READ from the managed block rather than pinned here
+      # or floated at @latest: a second pin drifts silently, and a float turns an
+      # unrelated upstream publish into a red build on somebody else's PR.
+      - name: Resolve the Quest version CLAUDE.md declares
+        id: quest
+        run: |
+          set -euo pipefail
+          # First match, then quit: no pipe to head, so a second "Quest CLI"
+          # mention can never make sed take SIGPIPE under pipefail and turn
+          # this step's loud failure into a bare exit 141.
+          version="$(sed -n '/Quest CLI [0-9]/{s/.*Quest CLI \([0-9][0-9.]*\).*/\1/p;q;}' CLAUDE.md)"
+          if [ -z "$version" ]; then
+            echo "::error file=CLAUDE.md::No 'Quest CLI <version>' line found in the managed block."
+            exit 1
+          fi
+          echo "Declared Quest version: $version"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+      - run: npm install -g "@opum-ai/quest@${{ steps.quest.outputs.version }}"
+      - name: Tracker reads cleanly
+        # To a file, never the log: the runner parses every stdout line as a
+        # possible workflow command, so record text quoting a CI log (or carrying
+        # ::add-mask:: / ::stop-commands::) would be acted on instead of printed.
+        # The exit code still gates; the count is the positive control.
+        run: |
+          set -euo pipefail
+          quest task list --json > "$RUNNER_TEMP/quest-task-list.json"
+          echo "read $(jq '.data | length' "$RUNNER_TEMP/quest-task-list.json") task record(s)"
+      - name: Managed instructions are current
+        run: quest agents --check --require-installed --target claude
