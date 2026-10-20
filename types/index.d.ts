@@ -10,6 +10,8 @@ export type View = {
   hidden: number
   /** Which source is drawn now. */
   index: number
+  /** One line under the drawing: where the HTML page was written, or why it was not. */
+  note?: string | undefined
 }
 
 declare module 'claude-code' {

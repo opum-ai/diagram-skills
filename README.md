@@ -135,8 +135,14 @@ A Claude Code mod (`hooks/register.tsx`) draws a Mermaid diagram in a pane:
 - `/diagram <path>` draws the first closed `mermaid` fence of a Markdown file,
   or the whole of a `.mmd` or `.mermaid` file.
 - The tool `mcp__diagram-skills__show_diagram` (`source`, optional `title` and
-  `alt`) lets a skill push its own diagram into the same pane. A source that is
-  not Mermaid is refused with a reason, and the pane keeps what it showed.
+  `alt`) lets a skill push its own diagram into the same pane.
+- **Syntax gate.** Where jsdom resolves (run `npm ci --prefix
+  skills/diagram-review/scripts`, as for the parse check), a source that does
+  not parse is refused with Mermaid's own message and the pane keeps what it
+  showed. Where it does not, the diagram is drawn as an **unvalidated
+  preview**, labelled "Open diagram to check", and the tool result says
+  `validated: false`. The gate runs under `node` only; the pane prefers `node`
+  over `bun` (bun installs a missing package from the network).
 
 The terminal draws Unicode art when it fits the pane; desktop, VS Code and
 mobile draw an SVG. Anything else (a type the renderer does not draw, art wider
@@ -219,10 +225,9 @@ and without the skill, then `python3 evals/grade.py <run-dir> --eval <id>`.
   prints a Mermaid fence as text there; the diagram pane draws it as art.
   GitHub, VS Code and JetBrains render it in place.
 - **The renderer is lenient.** For some malformed sources the bundled
-  renderer draws an empty or partial picture instead of failing. The pane
-  treats an empty drawing as a failure and shows the source, but it cannot
-  tell a partial one from a complete one; the parse check in
-  `skills/diagram-review` is the gate for syntax.
+  renderer draws an empty or partial picture instead of failing. With the
+  syntax gate those sources are refused; without it the pane treats an empty
+  drawing as a failure and labels any other preview unvalidated.
 - **Known gaps queued for iteration 2:**
   - `repo_inventory.py` misses services called by raw URL.
   - `lore query` in a repository without a lore bundle leaves a cache
