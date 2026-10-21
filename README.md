@@ -89,9 +89,18 @@ still fails broken diagrams.
 
 ## Install
 
-diagram-skills is not yet listed in the
-[opum-marketplace](https://github.com/opum-ai/opum-marketplace). Until it is,
-load it from a checkout:
+diagram-skills is listed in the
+[opum-marketplace](https://github.com/opum-ai/opum-marketplace), which pins a
+release tag:
+
+```text
+/plugin marketplace add opum-ai/opum-marketplace
+/plugin install diagram-skills@opum
+```
+
+The marketplace pin is the v0.1.0 release, which has the skills but not the
+[diagram pane](#the-diagram-pane). To get the pane before the pin moves, load
+the plugin from a checkout:
 
 ```bash
 git clone https://github.com/opum-ai/diagram-skills
@@ -119,6 +128,34 @@ The skills trigger on ordinary requests:
 
 > Review the diagram in docs/architecture.md before I merge it.
 
+## The diagram pane
+
+A Claude Code mod (`hooks/register.tsx`) draws a Mermaid diagram in a pane:
+
+- `/diagram <path>` draws the first closed `mermaid` fence of a Markdown file,
+  or the whole of a `.mmd` or `.mermaid` file.
+- The tool `mcp__diagram-skills__show_diagram` (`source`, optional `title` and
+  `alt`) lets a skill push its own diagram into the same pane.
+- **Syntax gate.** Where `node` is on PATH and jsdom resolves (run `npm ci --prefix
+  skills/diagram-review/scripts`, as for the parse check), a source that does
+  not parse is refused with Mermaid's own message and the pane keeps what it
+  showed. Where it does not, the diagram is drawn as an **unvalidated
+  preview**, labelled "Open diagram to check", and the tool result says
+  `validated: false`. The gate runs under `node` only; the pane prefers `node`
+  over `bun` (bun installs a missing package from the network).
+
+The terminal draws Unicode art when it fits the pane; desktop, VS Code and
+mobile draw an SVG. Anything else (a type the renderer does not draw, art wider
+or taller than the pane, a source over 20,000 characters, no `bun` or `node` on
+`PATH`) keeps the source, says why in one line, and offers an "Open diagram"
+button that writes a self-contained HTML page (vendored mermaid.js, strict
+security level, no network) and opens it. A file with several diagrams draws up
+to 8, with previous and next buttons.
+
+The renderer in `renderer/` is a byte-identical copy of plain-english-styles',
+with its licences; see [RENDERER-PROVENANCE.md](RENDERER-PROVENANCE.md).
+Transcript rendering of Mermaid fences stays with plain-english-styles.
+
 ## Evaluation
 
 Iteration 1 used 12 cases, two per skill, each run once with the skill and
@@ -143,6 +180,9 @@ checks did not yet separate the two. See Known limitations.
 
 ```text
 .claude-plugin/plugin.json    plugin manifest
+hooks/                        the diagram pane mod (register.tsx) and its tests
+types/                        the pane's state contract
+renderer/                     the copied Mermaid renderer, vendored files and licences
 .claude/skills/               symlinks to skills/ for local development
 .github/workflows/ci.yml      parse, self-test, lint, pytest, lore check, truth
 skills/<name>/                SKILL.md, examples/; diagram-review also has references/ and scripts/
@@ -181,8 +221,13 @@ and without the skill, then `python3 evals/grade.py <run-dir> --eval <id>`.
   with C4 classes. Mermaid's layout degrades past about 15 nodes.
 - **The Mermaid pin is manual.** When GitHub upgrades, bump
   `skills/diagram-review/scripts/package.json` deliberately.
-- **Terminals show source.** The Claude Code terminal prints Mermaid as
-  text. GitHub, VS Code and JetBrains render it.
+- **Terminals show source in the transcript.** The Claude Code terminal
+  prints a Mermaid fence as text there; the diagram pane draws it as art.
+  GitHub, VS Code and JetBrains render it in place.
+- **The renderer is lenient.** For some malformed sources the bundled
+  renderer draws an empty or partial picture instead of failing. With the
+  syntax gate those sources are refused; without it the pane treats an empty
+  drawing as a failure and labels any other preview unvalidated.
 - **Known gaps queued for iteration 2:**
   - `repo_inventory.py` misses services called by raw URL.
   - `lore query` in a repository without a lore bundle leaves a cache
@@ -191,4 +236,7 @@ and without the skill, then `python3 evals/grade.py <run-dir> --eval <id>`.
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+MIT AND EPL-2.0 AND BSD-2-Clause. The plugin's own code is MIT
+([LICENSE](LICENSE)); the copied renderer carries beautiful-mermaid and mermaid
+(MIT), entities (BSD-2-Clause) and the unmodified elkjs file (EPL-2.0). The
+licence texts and notices are in [renderer/licenses/](renderer/licenses/).
