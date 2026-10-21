@@ -65,7 +65,7 @@ function stubProcess (on: On, options: StubOptions = {}): Run[] {
 type Link = { exists: boolean; isLink: boolean }
 
 /** Answer `fs.read` (a map of path to text), `fs.exists` and `fs.stat` (the cache dir may be a symlink), and record `fs.write`. */
-function stubFs (on: On, files: Record<string, string>, cacheDir: Link = { exists: false, isLink: false }): { writes: { path: string; text: string }[] } {
+function stubFs (on: On, files: Record<string, string>, cacheDir: Link = { exists: false, isLink: false }, where: 'dir' | 'base' = 'dir'): { writes: { path: string; text: string }[] } {
   const writes: { path: string; text: string }[] = []
   on('fs.read', ($, e) => {
     const key = Object.keys(files).find(name => e.path === name || e.path.endsWith(`/${name}`))
@@ -73,8 +73,9 @@ function stubFs (on: On, files: Record<string, string>, cacheDir: Link = { exist
     if (text === undefined) throw new Error(`ENOENT: ${e.path}`)
     return { value: text }
   })
-  on('fs.exists', ($, e) => ({ value: cacheDir.exists && e.path.endsWith('/.cache/diagram-pane') }))
-  on('fs.stat', ($, e) => ({ value: { kind: 'dir' as const, size: 0, mtimeMs: 0, isLink: cacheDir.isLink && e.path.endsWith('/.cache/diagram-pane') } }))
+  const isTheLink = (path: string): boolean => path.endsWith(where === 'dir' ? '/.cache/diagram-pane' : '/.cache')
+  on('fs.exists', ($, e) => ({ value: cacheDir.exists && isTheLink(e.path) }))
+  on('fs.stat', ($, e) => ({ value: { kind: 'dir' as const, size: 0, mtimeMs: 0, isLink: cacheDir.isLink && isTheLink(e.path) } }))
   on('fs.write', ($, e) => { writes.push({ path: e.path, text: e.text }); return { value: undefined } })
   return { writes }
 }
@@ -303,7 +304,7 @@ describe('AC4: a missing runtime is stated', () => {
     expect(await again.find({ type: 'Text', text: /bun or node/ })).toBeDefined()
     await again.unmount()
     expect(helperCalls(runs).length).toBe(0)
-    expect(runs.filter(run => run.argv[1] === '--version').length).toBe(2) // bun, node: asked once each, never again
+    expect(runs.filter(run => run.argv[1] === '--version').length).toBe(2) // node, bun: asked once each, never again
   })
 })
 
@@ -422,6 +423,19 @@ describe('review fixes (DEC-221 a1): helper env, open, cache dir', () => {
     expect(writes.length).toBe(0)
     expect(runs.some(run => run.argv[0] === 'open')).toBe(false)
     expect(await ui.find({ type: 'Text', text: /symbolic link/ })).toBeDefined()
+    await ui.unmount()
+  })
+
+  test('a symlinked base .cache directory is refused too', async ($, on) => {
+    resetCaches()
+    const runs = stubProcess(on, { render: () => ({ ok: false, reason: 'unsupported-type', kind: 'gantt' }) })
+    const { writes } = stubFs(on, { 'g.mmd': 'gantt\n  title Plan' }, { exists: true, isLink: true }, 'base')
+    await runDiagram($, 'g.mmd')
+    const ui = await $.ui.mount(paneTarget('terminal'))
+    await ui.press({ key: await buttonKey(ui, /Open diagram/) })
+    expect(writes.length).toBe(0)
+    expect(runs.some(run => run.argv[0] === 'open')).toBe(false)
+    expect(await ui.find({ type: 'Text', text: /\/\.cache is a symbolic link/ })).toBeDefined()
     await ui.unmount()
   })
 

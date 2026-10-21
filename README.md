@@ -136,7 +136,7 @@ A Claude Code mod (`hooks/register.tsx`) draws a Mermaid diagram in a pane:
   or the whole of a `.mmd` or `.mermaid` file.
 - The tool `mcp__diagram-skills__show_diagram` (`source`, optional `title` and
   `alt`) lets a skill push its own diagram into the same pane.
-- **Syntax gate.** Where jsdom resolves (run `npm ci --prefix
+- **Syntax gate.** Where `node` is on PATH and jsdom resolves (run `npm ci --prefix
   skills/diagram-review/scripts`, as for the parse check), a source that does
   not parse is refused with Mermaid's own message and the pane keeps what it
   showed. Where it does not, the diagram is drawn as an **unvalidated

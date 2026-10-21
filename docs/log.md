@@ -21,6 +21,7 @@
 - 2026-10-06T19:36:00-05:00 8b7f59ea110400e077fc95746829916e278947d0 chore(DSKI-17): add plugin validate and Tracker integrity CI jobs (#18)
 - 2026-10-06T19:52:00-05:00 9a73caab71673cf3f7c6c005a6e1d2dd4c368871 chore(DSKI-17): close task with acceptance criteria and final summary (#24)
 - 2026-10-20T18:16:56-05:00 180dc17ce0c366e588da99364b6502fc82197a7d feat(DSKI-18): the diagram pane mod - /diagram and show_diagram draw Mermaid in a pane
+- 2026-10-20T18:39:53-05:00 2f3b882cc5bd8d00e643e38faca2bf133eddaa16 fix(DSKI-18): strict syntax gate, helper env, shipped-page proof and the review's LOW fixes
 
 ## docs/reference
 

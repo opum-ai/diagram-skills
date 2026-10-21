@@ -392,7 +392,7 @@ export const register: Register = (on, options) => {
       name: TOOL,
       description:
         'Draw a Mermaid diagram in the diagram pane. Give the Mermaid source (without the code fence), '
-        + 'an optional title and an optional one-sentence alt text. Where the syntax gate can run (jsdom installed), a source that does not '
+        + 'an optional title and an optional one-sentence alt text. Where the syntax gate can run (it needs node on PATH as well as the installed jsdom), a source that does not '
         + 'parse is refused with Mermaid\'s own message and the pane keeps what it showed; where it cannot, the diagram is drawn as an '
         + 'unvalidated preview and the result says validated: false.',
       inputSchema: {
